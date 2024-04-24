@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { View, Text, TextInput, Pressable, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
+
+import taskReducer from "../../reducers/tasksReducer";
 import styles from "../../style/toDoListStyle";
 
 const ToDoList = () => {
-  const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState("");
+
+  const [tasks, dispatch] = useReducer(taskReducer, []);
 
   useEffect(() => {
     console.log("ToDoList neu gerendert:", tasks);
@@ -15,17 +18,13 @@ const ToDoList = () => {
 
   const addTask = () => {
     if (taskInput.trim() !== "") {
-      setTasks((prevTasks) => [...prevTasks, taskInput]);
+      dispatch({ type: "ADD_TASK", payload: taskInput });
       setTaskInput("");
     }
   };
 
   const deleteTask = (index) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks.splice(index, 1);
-      return updatedTasks;
-    });
+    dispatch({ type: "DELETE_TASK", payload: index });
   };
 
   const editTask = (index, newText) => {
@@ -34,13 +33,12 @@ const ToDoList = () => {
   };
 
   const saveEditedTask = () => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks[editingIndex] = editedTask;
-      setEditingIndex(null);
-      setEditedTask("");
-      return updatedTasks;
+    dispatch({
+      type: "EDIT_TASK",
+      payload: { index: editingIndex, editedTask: editedTask },
     });
+    setEditingIndex(null);
+    setEditedTask("");
   };
 
   return (
