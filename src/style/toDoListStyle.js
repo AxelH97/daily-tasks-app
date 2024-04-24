@@ -40,6 +40,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    height: 50,
+    width: "100%",
+  },
+  buttons: {
+    flexDirection: "row",
+  },
+  saveButton: {
+    margin: 10,
+  },
+  deleteButton: {
+    backgroundColor: "red",
+    margin: 10,
+  },
+  editButton: {
+    backgroundColor: "blue",
+    margin: 10,
   },
 });
 

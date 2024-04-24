@@ -1,8 +1,10 @@
+// App.js
+
 import React from "react";
 import TaskContextProvider from "./src/context/TasksContext";
 import ToDoList from "./src/features/todo/toDoList";
 import style from "./src/style/toDoListStyle";
-import { View } from "react-native-web";
+import { View } from "react-native";
 
 const App = () => {
   return (

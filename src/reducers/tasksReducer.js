@@ -1,3 +1,5 @@
+//src/reducers/tasksReducer.js
+
 const taskReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
