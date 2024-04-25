@@ -1,18 +1,18 @@
 // App.js
 
 import React from "react";
-import TaskContextProvider from "./src/context/TasksContext";
 import ToDoList from "./src/features/todo/toDoList";
 import style from "./src/style/toDoListStyle";
 import { View } from "react-native";
+import AppProvider from "./src/context/AppProvider";
 
 const App = () => {
   return (
-    <View style={style.container}>
-      <TaskContextProvider>
+    <AppProvider>
+      <View style={style.container}>
         <ToDoList />
-      </TaskContextProvider>
-    </View>
+      </View>
+    </AppProvider>
   );
 };
 

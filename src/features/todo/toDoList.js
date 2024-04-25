@@ -1,16 +1,15 @@
 //src/ features/ todo/ ToDoList.js
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable, FlatList } from "react-native";
 
-import taskReducer from "../../reducers/tasksReducer";
 import styles from "../../style/toDoListStyle";
+import { useTaskContext } from "../../context/TasksContext";
 
 const ToDoList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState("");
-
-  const [tasks, dispatch] = useReducer(taskReducer, []);
+  const { tasks, dispatchTasks } = useTaskContext();
 
   useEffect(() => {
     console.log("ToDoList neu gerendert:", tasks);
@@ -18,13 +17,13 @@ const ToDoList = () => {
 
   const addTask = () => {
     if (taskInput.trim() !== "") {
-      dispatch({ type: "ADD_TASK", payload: taskInput });
+      dispatchTasks({ type: "ADD_TASK", payload: taskInput });
       setTaskInput("");
     }
   };
 
   const deleteTask = (index) => {
-    dispatch({ type: "DELETE_TASK", payload: index });
+    dispatchTasks({ type: "DELETE_TASK", payload: index });
   };
 
   const editTask = (index, newText) => {
@@ -33,7 +32,7 @@ const ToDoList = () => {
   };
 
   const saveEditedTask = () => {
-    dispatch({
+    dispatchTasks({
       type: "EDIT_TASK",
       payload: { index: editingIndex, editedTask: editedTask },
     });
