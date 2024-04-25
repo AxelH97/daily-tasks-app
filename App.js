@@ -8,11 +8,11 @@ import AppProvider from "./src/context/AppProvider";
 
 const App = () => {
   return (
-    <AppProvider>
-      <View style={style.container}>
+    <View style={style.container}>
+      <AppProvider>
         <ToDoList />
-      </View>
-    </AppProvider>
+      </AppProvider>
+    </View>
   );
 };
 
