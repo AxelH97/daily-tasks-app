@@ -11,7 +11,6 @@ const initialTasks = [];
 
 const TaskContextProvider = ({ children }) => {
   const [tasks, dispatchTasks] = useReducer(taskReducer, initialTasks);
-  console.log("tasks:", tasks);
   return (
     <TaskContext.Provider value={{ tasks, dispatchTasks }}>
       {children}
