@@ -1,17 +1,15 @@
 // App.js
 
 import React from "react";
-import ToDoList from "./src/features/todo/toDoList";
-import style from "./src/style/toDoListStyle";
-import { View } from "react-native";
 import AppProvider from "./src/context/AppProvider";
+import { createStackNavigator } from "@react-navigation/stack";
+import Routes from "./src/features/navigation/layout/Routes";
 
+const Stack = createStackNavigator();
 const App = () => {
   return (
     <AppProvider>
-      <View style={style.container}>
-        <ToDoList />
-      </View>
+      <Routes />
     </AppProvider>
   );
 };
