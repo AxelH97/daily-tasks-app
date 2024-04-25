@@ -5,7 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 export default function Routes() {
   const Stack = createStackNavigator();
   const routes = useRoutes();
-  console.log("routes:", routes);
   return (
     <NavigationContainer>
       <Stack.Navigator>

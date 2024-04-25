@@ -72,7 +72,6 @@ const ToDoList = () => {
                   onPress={saveEditedTask}
                   style={[styles.button, styles.saveButton]}
                 >
-                  {" "}
                   <Text>Save</Text>
                 </Pressable>
               ) : (
@@ -94,7 +93,7 @@ const ToDoList = () => {
             </View>
           </View>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(index) => index.toString()}
       />
     </View>
   );
