@@ -1,23 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import UserContextProvider from "./src/context/UserContext";
+// App.js
 
-export default function App() {
+import React from "react";
+import TaskContextProvider from "./src/context/TasksContext";
+import ToDoList from "./src/features/todo/toDoList";
+import style from "./src/style/toDoListStyle";
+import { View } from "react-native";
+
+const App = () => {
   return (
-    <UserContextProvider>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-    </UserContextProvider>
+    <View style={style.container}>
+      <TaskContextProvider>
+        <ToDoList />
+      </TaskContextProvider>
+    </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;

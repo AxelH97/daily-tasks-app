@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+//src/ features/ todo/ ToDoList.js
+import React, { useState, useEffect, useReducer } from "react";
 import { View, Text, TextInput, Pressable, FlatList } from "react-native";
-import { ListItem } from "react-native-elements";
+
+import taskReducer from "../../reducers/tasksReducer";
 import styles from "../../style/toDoListStyle";
 
 const ToDoList = () => {
-  const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState("");
+
+  const [tasks, dispatch] = useReducer(taskReducer, []);
 
   useEffect(() => {
     console.log("ToDoList neu gerendert:", tasks);
@@ -15,17 +18,13 @@ const ToDoList = () => {
 
   const addTask = () => {
     if (taskInput.trim() !== "") {
-      setTasks((prevTasks) => [...prevTasks, taskInput]);
+      dispatch({ type: "ADD_TASK", payload: taskInput });
       setTaskInput("");
     }
   };
 
   const deleteTask = (index) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks.splice(index, 1);
-      return updatedTasks;
-    });
+    dispatch({ type: "DELETE_TASK", payload: index });
   };
 
   const editTask = (index, newText) => {
@@ -34,13 +33,12 @@ const ToDoList = () => {
   };
 
   const saveEditedTask = () => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks[editingIndex] = editedTask;
-      setEditingIndex(null);
-      setEditedTask("");
-      return updatedTasks;
+    dispatch({
+      type: "EDIT_TASK",
+      payload: { index: editingIndex, editedTask: editedTask },
     });
+    setEditingIndex(null);
+    setEditedTask("");
   };
 
   return (
@@ -55,48 +53,47 @@ const ToDoList = () => {
       <Pressable onPress={addTask} style={styles.button}>
         <Text>Add Task</Text>
       </Pressable>
+
       <FlatList
         data={tasks}
         renderItem={({ item, index }) => (
-          <ListItem
-            key={index.toString()}
-            title={
-              index === editingIndex ? (
-                <TextInput
-                  style={styles.input}
-                  value={editedTask}
-                  onChangeText={(text) => setEditedTask(text)}
-                />
+          <View style={styles.task} key={index.toString()}>
+            {index === editingIndex ? (
+              <TextInput
+                style={[styles.input, styles.listItemText]} // Stil für bearbeitbares Textfeld
+                value={editedTask}
+                onChangeText={(text) => setEditedTask(text)}
+              />
+            ) : (
+              <Text style={styles.listItemText}>{item}</Text> // Stil für Listenelement
+            )}
+            <View style={styles.buttons}>
+              {index === editingIndex ? (
+                <Pressable
+                  onPress={saveEditedTask}
+                  style={[styles.button, styles.saveButton]}
+                >
+                  {" "}
+                  <Text>Save</Text>
+                </Pressable>
               ) : (
-                item
-              )
-            }
-            rightElement={
-              <View style={styles.buttons}>
-                {index === editingIndex ? (
-                  <Pressable onPress={saveEditedTask} style={styles.button}>
-                    <Text>Save</Text>
+                <>
+                  <Pressable
+                    onPress={() => deleteTask(index)}
+                    style={[styles.button, styles.deleteButton]} // Stil für Delete-Button
+                  >
+                    <Text>Delete</Text>
                   </Pressable>
-                ) : (
-                  <>
-                    <Pressable
-                      onPress={() => deleteTask(index)}
-                      style={styles.button}
-                    >
-                      <Text>Delete</Text>
-                    </Pressable>
-                    <Pressable
-                      onPress={() => editTask(index, item)}
-                      style={styles.button}
-                    >
-                      <Text>Edit</Text>
-                    </Pressable>
-                  </>
-                )}
-              </View>
-            }
-            bottomDivider
-          />
+                  <Pressable
+                    onPress={() => editTask(index, item)}
+                    style={[styles.button, styles.editButton]} // Stil für Edit-Button
+                  >
+                    <Text>Edit</Text>
+                  </Pressable>
+                </>
+              )}
+            </View>
+          </View>
         )}
         keyExtractor={(item, index) => index.toString()}
       />
