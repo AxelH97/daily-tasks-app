@@ -1,7 +1,7 @@
 const developmentMode = process.env.NODE_ENV === "development";
 const productionMode = process.env.NODE_ENV === "production";
 
-const API_URL = developmentMode ? "http://localhost:4444" : productionMode;
+const API_URL = developmentMode ? "http://localhost:4445" : productionMode;
 
 const endpoints = {
   register: `${API_URL}/users/register`,

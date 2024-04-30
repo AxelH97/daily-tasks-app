@@ -27,6 +27,7 @@ const Login = () => {
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
+
   const fetchData = async () => {
     try {
       const response = await fetch(`${API_URL}/users/login`, {
@@ -41,6 +42,7 @@ const Login = () => {
       });
       const data = await response.json();
       console.log(data);
+      dispatchUser({ type: "login_success", payload: data });
       navigation.navigate(paths.todos);
     } catch (error) {
       console.log(error);

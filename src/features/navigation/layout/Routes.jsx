@@ -22,8 +22,7 @@ export default function Routes() {
               console.log("Route options for:", route.path);
               console.log("route:", route);
               console.log("user.isLoggedIn:", user.isLoggedIn);
-              if (route.isProtected && !user.isLoggedIn) {
-                //navigation.navigate(route.redirectTo);
+              if (route.isProtected && !user.isLoggedIn && user.email !== "") {
                 return {
                   screen: route.redirectTo,
                   headerShown: false,

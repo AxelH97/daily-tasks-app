@@ -9,7 +9,7 @@ const initialUser = {
   _id: "",
   username: "",
   email: "",
-  isloggedIn: false,
+  isLoggedIn: false,
 };
 
 const UserContextProvider = ({ children }) => {
