@@ -14,9 +14,12 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import styles from "../style/loginStyle";
+import { useNavigation } from "@react-navigation/native";
+import { paths } from "../features/navigation/routing/paths";
 
 const Register = () => {
   const [secureEntry, setSecureEntry] = useState(true);
+  const navigation = useNavigation();
 
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
@@ -69,7 +72,10 @@ const Register = () => {
           </TouchableOpacity>
         </View>
         <View style={{ marginTop: 60 }} />
-        <Pressable style={styles.buttonContainer}>
+        <Pressable
+          onPress={() => navigation.navigate(paths.login)}
+          style={styles.buttonContainer}
+        >
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
       </KeyboardAvoidingView>

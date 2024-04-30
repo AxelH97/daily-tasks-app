@@ -10,8 +10,11 @@ import {
 } from "react-native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../style/loginStyle";
+import { useNavigation } from "@react-navigation/native";
+import { paths } from "../features/navigation/routing/paths";
 
 const Login = () => {
+  const navigation = useNavigation();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const toggleSecureEntry = () => {
@@ -67,16 +70,25 @@ const Login = () => {
             }}
           >
             <Text>Keep me logged in</Text>
-            <Text style={{ color: "#874CCC", fontWeight: "500" }}>
+            <Text
+              onPress={() => navigation.navigate(paths.forgotPassword)}
+              style={{ color: "#874CCC", fontWeight: "500" }}
+            >
               Forgot Password
             </Text>
           </View>
           <View style={{ marginTop: 60 }} />
-          <Pressable style={styles.buttonContainer}>
+          <Pressable
+            onPress={() => navigation.navigate(paths.todos)}
+            style={styles.buttonContainer}
+          >
             <Text style={styles.buttonText}>Login</Text>
           </Pressable>
           <Pressable style={{ marginTop: 15 }}>
-            <Text style={styles.signupText}>
+            <Text
+              onPress={() => navigation.navigate(paths.register)}
+              style={styles.signupText}
+            >
               Don't have an account? Sign up
             </Text>
           </Pressable>
