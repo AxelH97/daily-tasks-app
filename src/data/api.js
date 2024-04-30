@@ -15,4 +15,4 @@ const endpoints = {
   notepad: `${API_URL}/notepad`,
 };
 
-export default { endpoints, API_URL, productionMode };
+export { endpoints, API_URL, productionMode };

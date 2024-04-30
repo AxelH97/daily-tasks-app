@@ -8,6 +8,7 @@ export default function Routes() {
   const Stack = createStackNavigator();
   const routes = useRoutes();
   const { user } = useUsersContext();
+  console.log("Route:", routes);
 
   return (
     <NavigationContainer>
@@ -18,8 +19,11 @@ export default function Routes() {
             name={route.path}
             component={route.component}
             options={({ navigation }) => {
+              console.log("Route options for:", route.path);
+              console.log("route:", route);
+              console.log("user.isLoggedIn:", user.isLoggedIn);
               if (route.isProtected && !user.isLoggedIn) {
-                navigation.navigate(route.redirectTo);
+                //navigation.navigate(route.redirectTo);
                 return {
                   screen: route.redirectTo,
                   headerShown: false,
