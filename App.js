@@ -1,10 +1,10 @@
 // App.js
 
 import React from "react";
+import AppProvider from "./src/context/AppProvider";
 import ToDoList from "./src/features/todo/toDoList";
 import style from "./src/style/toDoListStyle";
 import { View } from "react-native";
-import AppProvider from "./src/context/AppProvider";
 
 const App = () => {
   return (
