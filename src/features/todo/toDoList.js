@@ -43,7 +43,10 @@ const ToDoList = () => {
   console.log("tasks:", tasks);
 
   const deleteTask = (index) => {
-    dispatchTasks({ type: "DELETE_TASK", payload: index });
+    if (tasks[index]) {
+      taskService.deleteTask(tasks[index]._id);
+      dispatchTasks({ type: "DELETE_TASK", payload: index });
+    }
   };
 
   const editTask = (index, newText) => {
