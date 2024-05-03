@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { paths } from "../features/navigation/routing/paths";
 import { useUsersContext } from "../context/UserContext";
 import { API_URL } from "../data/api";
+import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -27,24 +28,50 @@ const Login = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
 
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(`${API_URL}/users/login`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: email,
+  //         password: password,
+  //       }),
+  //     });
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || "Login failed");
+  //     }
+  //     const data = await response.json();
+  //     console.log(data);
+  //     dispatchUser({ type: "login_success", payload: data });
+  //     navigation.navigate(paths.todos);
+  //   } catch (error) {
+  //     console.log(error);
+  //     Alert.alert("Login Failed");
+  //   }
+  // };
+
   const fetchData = async () => {
     try {
-      const response = await fetch(`${API_URL}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+      const response = await axios.post(`${API_URL}/users/login`, {
+        email: email,
+        password: password,
       });
-      const data = await response.json();
+
+      if (!response.status === 200) {
+        const errorData = response.data;
+        throw new Error(errorData.message || "Login failed");
+      }
+
+      const data = response.data;
       console.log(data);
       dispatchUser({ type: "login_success", payload: data });
       navigation.navigate(paths.todos);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       Alert.alert("Login Failed");
     }
   };

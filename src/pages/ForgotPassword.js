@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { paths } from "../features/navigation/routing/paths";
 import { useUsersContext } from "../context/UserContext";
 import { API_URL } from "../data/api";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const { user } = useUsersContext();
@@ -14,20 +15,15 @@ const ForgotPassword = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${API_URL}/users/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-        }),
+      const response = await axios.post(`${API_URL}/users/forgot-password`, {
+        email: email,
       });
-      const data = await response.json();
+
+      const data = response.data;
       console.log(data);
       navigation.navigate(paths.login);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
