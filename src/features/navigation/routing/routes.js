@@ -2,6 +2,8 @@ import { paths } from "./paths";
 import WelcomeScreen from "../../../pages/WelcomeScreen";
 import Register from "../../../pages/Register";
 import Login from "../../../pages/Login";
+import ForgotPassword from "../../../pages/ForgotPassword";
+import ToDoList from "../../todo/toDoList";
 import { useUsersContext } from "../../../context/UserContext";
 
 const useRoutes = () => {
@@ -20,23 +22,23 @@ const useRoutes = () => {
       component: Login,
     },
 
-    /*{
+    {
       path: paths.forgotPassword,
       component: ForgotPassword,
-    },
+    } /*
     {
       path: paths.profile,
       component: Profile,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
-    },
+    },*/,
     {
       path: paths.todos,
-      component: Todos,
+      component: ToDoList,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
-    {
+    /*{
       path: paths.calendar,
       component: Calendar,
       isProtected: !user.isLoggedIn,

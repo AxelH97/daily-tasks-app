@@ -2,7 +2,7 @@ const paths = {
   welcomescreen: "welcome",
   register: "register",
   login: "login",
-  forgotPassword: "forgot-password",
+  forgotPassword: "forgotPassword",
   profile: "profile",
   todos: "todos",
   calendar: "calendar",

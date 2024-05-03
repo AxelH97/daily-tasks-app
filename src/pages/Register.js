@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import {
   MaterialIcons,
@@ -14,12 +15,37 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import styles from "../style/loginStyle";
+import { useNavigation } from "@react-navigation/native";
+import { paths } from "../features/navigation/routing/paths";
+import { API_URL } from "../data/api";
+import axios from "axios";
 
 const Register = () => {
   const [secureEntry, setSecureEntry] = useState(true);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.post(`${API_URL}/users/signup`, {
+        username: username,
+        email: email,
+        password: password,
+      });
+
+      const data = response.data;
+      console.log(data);
+      navigation.navigate(paths.login);
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Signup Failed");
+    }
   };
 
   return (
@@ -33,7 +59,11 @@ const Register = () => {
         </View>
         <View style={styles.inputContainer}>
           <Ionicons style={styles.icon} name="person" size={24} color="grey" />
-          <TextInput style={styles.input} placeholder="Enter your name" />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your name"
+            onChangeText={(text) => setUsername(text)}
+          />
         </View>
         <View style={styles.inputContainer}>
           <MaterialIcons
@@ -42,7 +72,11 @@ const Register = () => {
             size={20}
             color="gray"
           />
-          <TextInput style={styles.input} placeholder="Enter your email" />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your email"
+            onChangeText={(text) => setEmail(text)}
+          />
         </View>
         <View style={styles.passwordContainer}>
           <MaterialIcons
@@ -55,6 +89,7 @@ const Register = () => {
             style={styles.input}
             placeholder="Enter your password"
             secureTextEntry={secureEntry}
+            onChangeText={(text) => setPassword(text)}
           />
           <TouchableOpacity
             onPress={toggleSecureEntry}
@@ -69,7 +104,7 @@ const Register = () => {
           </TouchableOpacity>
         </View>
         <View style={{ marginTop: 60 }} />
-        <Pressable style={styles.buttonContainer}>
+        <Pressable onPress={fetchData} style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
       </KeyboardAvoidingView>
