@@ -28,32 +28,6 @@ const Login = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/users/login`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: email,
-  //         password: password,
-  //       }),
-  //     });
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       throw new Error(errorData.message || "Login failed");
-  //     }
-  //     const data = await response.json();
-  //     console.log(data);
-  //     dispatchUser({ type: "login_success", payload: data });
-  //     navigation.navigate(paths.todos);
-  //   } catch (error) {
-  //     console.log(error);
-  //     Alert.alert("Login Failed");
-  //   }
-  // };
-
   const fetchData = async () => {
     try {
       const response = await axios.post(`${API_URL}/users/login`, {

@@ -31,28 +31,6 @@ const Register = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/users/signup`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         username: username,
-  //         email: email,
-  //         password: password,
-  //       }),
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     navigation.navigate(paths.login);
-  //   } catch (error) {
-  //     console.log(error);
-  //     Alert.alert("Login Failed");
-  //   }
-  // };
-
   const fetchData = async () => {
     try {
       const response = await axios.post(`${API_URL}/users/signup`, {
