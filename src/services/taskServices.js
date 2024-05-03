@@ -34,6 +34,18 @@ const taskService = {
       throw error;
     }
   },
+
+  updateTask: async (id, updatedTitle) => {
+    try {
+      const response = await axios.put(`${baseURL}/${id}`, {
+        title: updatedTitle,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Fehler beim Aktualisieren der Aufgabe:", error);
+      throw error;
+    }
+  },
 };
 
 export default taskService;

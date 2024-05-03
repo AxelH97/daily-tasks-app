@@ -8,7 +8,7 @@ import { useTaskContext } from "../../context/TasksContext";
 
 const ToDoList = () => {
   const [taskInput, setTaskInput] = useState("");
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingIndex, setEditingIndex] = useState("");
   const [editedTask, setEditedTask] = useState("");
   const { tasks, dispatchTasks } = useTaskContext();
 
@@ -51,16 +51,35 @@ const ToDoList = () => {
 
   const editTask = (index, newText) => {
     setEditingIndex(index);
-    setEditedTask(newText);
+    setEditedTask(newText.title);
   };
 
-  const saveEditedTask = () => {
-    dispatchTasks({
-      type: "EDIT_TASK",
-      payload: { index: editingIndex, editedTask: editedTask },
-    });
-    setEditingIndex(null);
-    setEditedTask("");
+  console.log("editingIndex:", editingIndex);
+  console.log("editedTask:", editedTask);
+
+  const saveEditedTask = async () => {
+    try {
+      // Überprüfen, ob editingIndex nicht null ist
+      if (editingIndex !== null) {
+        // Überprüfen, ob editedTask nicht leer ist
+        if (editedTask.trim() !== "") {
+          await taskService.updateTask(tasks[editingIndex]._id, editedTask);
+          dispatchTasks({
+            type: "EDIT_TASK",
+            payload: { index: editingIndex, editedTask: editedTask },
+          });
+        } else {
+          console.error("Der bearbeitete Task-Titel ist leer.");
+        }
+      } else {
+        console.error("Der Index des bearbeiteten Tasks ist null.");
+      }
+      // Setzen von editingIndex und editedTask unabhängig von den Bedingungen zurück
+      setEditingIndex("");
+      setEditedTask("");
+    } catch (error) {
+      console.error("Fehler beim Speichern der bearbeiteten Aufgabe:", error);
+    }
   };
 
   return (
