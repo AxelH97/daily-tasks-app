@@ -1,15 +1,22 @@
-import React from "react";
-import CalendarPage from "./src/pages/CalenderPages";
-import { CalendarProvider } from "./src/context/ContextContext";
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-const App = () => {
+
+export default function App() {
+  const [selectedDate, setSelectedDate] = useState(null);
+
   return (
-    <CalendarProvider>
-      <div className="App">
-        <CalendarPage />
-      </div>
-    </CalendarProvider>
+    <View style={styles.container}>
+      <Calendar onSelectDate={setSelectedDate} selected={selectedDate} />
+    </View>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

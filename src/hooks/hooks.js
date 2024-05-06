@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import moment from 'moment';
 
-const useCustomHook = () => {
-  // Benutzerdefinierte Hook-Logik hier
-};
 
-export default useCustomHook;
+export const getCurrentMonth = (dates, scrollPosition) => {
+  const month = moment(dates[0]).add(scrollPosition / 60, 'days').format('MMMM');
+  return month;
+}
