@@ -38,7 +38,6 @@ const Register = () => {
         email: email,
         password: password,
       });
-
       const data = response.data;
       console.log(data);
       navigation.navigate(paths.login);
