@@ -3,6 +3,7 @@ const paths = {
   register: "register",
   login: "login",
   forgotPassword: "forgotPassword",
+  resetPassword: "resetPassword",
   profile: "profile",
   todos: "todos",
   calendar: "calendar",
