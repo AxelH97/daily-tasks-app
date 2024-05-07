@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
 const DateComponent = ({ date, onSelectDate, selected }) => {
-  const day = moment(date).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD') ? 'Today' : moment(date).format('ddd');
+  const day = moment(date).format('06-05-2024') === moment().format('YYYY-MM-DD') ? 'Today' : moment(date).format('ddd');
   const dayNumber = moment(date).format('D');
   const fullDate = moment(date).format('YYYY-MM-DD');
 
