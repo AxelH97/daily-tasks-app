@@ -17,6 +17,11 @@ const userReducer = (state, action) => {
       return {
         ...initialState,
       };
+    case "reset_password":
+      return {
+        ...state,
+        user: action.payload,
+      };
     case "fetch-user-data":
       const newState = action.value;
       return {

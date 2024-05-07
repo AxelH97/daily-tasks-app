@@ -21,7 +21,7 @@ const ForgotPassword = () => {
 
       const data = response.data;
       console.log(data);
-      navigation.navigate(paths.login);
+      navigation.navigate(paths.resetPassword);
     } catch (error) {
       console.error(error);
     }
