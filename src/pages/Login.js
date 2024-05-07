@@ -29,9 +29,6 @@ const Login = () => {
   };
 
   const fetchData = async () => {
-    console.log("Eingegebene Anmeldeinformationen:");
-    console.log("Email:", email);
-    console.log("Passwort:", password);
     try {
       const response = await axios.post(
         `${API_URL}/users/login`,
