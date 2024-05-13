@@ -30,7 +30,7 @@ const Register = () => {
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
-
+  console.log("API_URL:", API_URL);
   const fetchData = async () => {
     try {
       const response = await axios.post(`${API_URL}/users/signup`, {
