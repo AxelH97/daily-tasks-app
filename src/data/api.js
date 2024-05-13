@@ -2,6 +2,7 @@ import {DEVELOPER_IP} from "@env";
 const developmentMode = process.env.NODE_ENV === "development";
 const productionMode = process.env.NODE_ENV === "production";
 
+<<<<<<< HEAD
 
 const API_URL = developmentMode
   ? `http://${ DEVELOPER_IP}:4444`
@@ -9,6 +10,9 @@ const API_URL = developmentMode
   ; 
 
   console.log('API_URL:',API_URL);
+=======
+const API_URL = developmentMode ? "http://localhost:4444" : productionMode; //"http://10.0.2.2:4444"
+>>>>>>> dev
 
 const endpoints = {
   register: `${API_URL}/users/register`,
