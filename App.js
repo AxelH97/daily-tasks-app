@@ -1,11 +1,24 @@
-import React from "react";
-import AppProvider from "./src/context/AppProvider";
-import Routes from "./src/features/navigation/layout/Routes";
-const App = () => {
+import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Calendar from './components/Calendar';
+
+export default function App() {
+  const [selectedDate, setSelectedDate] = useState(null);
+
   return (
-    <AppProvider>
-      <Routes />
-    </AppProvider>
+    <View style={styles.container}>
+      <Calendar onSelectDate={setSelectedDate} selected={selectedDate} />
+      <StatusBar style="auto" />
+    </View>
   );
-};
-export default App;
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
