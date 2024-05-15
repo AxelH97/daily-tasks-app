@@ -11,7 +11,7 @@ const Calendar = ({ onSelectDate, selected }) => {
   // get the dates from today to 10 days from now, format them as strings and store them in state
   const getDates = () => {
     const _dates = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 4; i++) {
       const date = moment().add(i, 'days')
       _dates.push(date)
     }
@@ -72,16 +72,19 @@ const styles = StyleSheet.create({
   centered: {
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   title: {
-    fontSize: 20,
+    fontSize: 35,
     fontWeight: 'bold',
-  },
+    marginVertical: 20,
+   },
   dateSection: {
     width: '100%',
     padding: 20,
   },
   scroll: {
     height: 150,
+
   },
 })
