@@ -51,7 +51,7 @@ const Login = () => {
       dispatchUser({ type: "login_success", payload: data });
       navigation.navigate(paths.todos);
     } catch (error) {
-      console.error(error);
+      console.error("login failed:", error);
       Alert.alert("Login Failed");
     }
   };
