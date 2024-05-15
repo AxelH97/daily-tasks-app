@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,} from 'react-native';
 import moment from 'moment';
 
 const DateComponent = ({ date, onSelectDate, selected }) => {
@@ -14,14 +14,15 @@ const DateComponent = ({ date, onSelectDate, selected }) => {
     >
       <Text style={[styles.big, selected === fullDate && { color: "#fff" }]}>{day}</Text>
       <View style={{ height: 10 }} />
-      <Text style={[styles.medium, selected === fullDate && { color: "#fff", fontWeight: 'bold', fontSize: 24 }]}>{dayNumber}</Text>
+      <Text style={[styles.medium, selected === fullDate && { color: "#fff", fontWeight: 'bold', fontSize: 20 }]}>{dayNumber}</Text>
+      
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
     borderRadius: 10,
     borderColor: '#ddd',
     padding: 10,
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
   medium: {
     fontSize: 16,
   },
+ 
 });
 
 export default DateComponent;
