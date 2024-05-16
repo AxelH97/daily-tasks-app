@@ -6,7 +6,7 @@ import ForgotPassword from "../../../pages/ForgotPassword";
 import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
-import Stopwatch from "../../../../components/StopWatch";
+import Stopwatch from "../../../components/StopWatch";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
