@@ -9,6 +9,10 @@ import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Calendar from "../../components/Calendar";
 import Profile from "../../pages/Profile";
+import { Entypo } from "@expo/vector-icons";
+import StopWatch from "../../components/StopWatch";
+import { Ionicons } from "@expo/vector-icons";
+import Timer from "../../components/timer";
 
 const Tab = createBottomTabNavigator();
 
@@ -180,6 +184,35 @@ const ToDoListWithBottomNavigation = () => {
             ),
         }}
       />
+      <Tab.Screen
+        name="StopWatch"
+        component={StopWatch}
+        options={{
+          tabBarLabel: "Stopwatch",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Entypo name="stopwatch" size={24} color="#7CB9E8" />
+            ) : (
+              <Entypo name="stopwatch" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="Timer"
+        component={Timer}
+        options={{
+          tabBarLabel: "timer",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="timer" size={24} color="#7CB9E8" />
+            ) : (
+              <Ionicons name="timer" size={24} color="black" />
+            ),
+        }}
+      />
+
       <Tab.Screen
         name="profile"
         component={Profile}
