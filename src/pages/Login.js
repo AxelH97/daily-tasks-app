@@ -19,7 +19,7 @@ import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
-  const { user, dispatchUser } = useUsersContext();
+  const { dispatchUser } = useUsersContext();
   const [secureEntry, setSecureEntry] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
