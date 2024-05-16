@@ -6,7 +6,6 @@ import ForgotPassword from "../../../pages/ForgotPassword";
 import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
-import Stopwatch from "../../../components/StopWatch";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
@@ -32,19 +31,19 @@ const useRoutes = () => {
       path: paths.resetPassword,
       component: ResetPassword,
     },
-    /*
+
     {
       path: paths.profile,
       component: Profile,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
-    },*/ {
+    },
+    {
       path: paths.todos,
       component: ToDoList,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
-
     /*{
       path: paths.calendar,
       component: Calendar,
