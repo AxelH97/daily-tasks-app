@@ -7,7 +7,7 @@ import styles from "../../style/toDoListStyle";
 import { useTaskContext } from "../../context/TasksContext";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Calendar from "./../../components/calender";
+import Calendar from "../../components/Calendar";
 import Profile from "../../pages/Profile";
 
 const Tab = createBottomTabNavigator();
