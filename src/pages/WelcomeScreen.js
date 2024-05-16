@@ -9,65 +9,58 @@ const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Daily-Tasks</Text>
-      <TouchableOpacity onPress={() => navigation.navigate(paths.register)}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Register</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate(paths.login)}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </View>
-      </TouchableOpacity>
+      <Text style={styles.subText}>Organize your day, achieve your goals.</Text>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity onPress={() => navigation.navigate(paths.register)}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Register</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(paths.login)}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Login</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f0f0f0", // Hintergrundfarbe
+    backgroundColor: "black",
   },
   welcomeText: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 40,
-    color: "#333", // Textfarbe
+    fontSize: 24,
+    marginBottom: 20,
+    color: "white",
+  },
+  subText: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: "gray",
+    textAlign: "center",
+    paddingHorizontal: 20,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   buttonContainer: {
-    flexDirection: "row", // Anordnung der Buttons nebeneinander
-    justifyContent: "center", // Zentrieren der Buttons horizontal
-    alignItems: "center", // Zentrieren der Buttons vertikal
-    width: "80%", // Breite des Containers
+    backgroundColor: "#874CCC",
+    padding: 10,
+    margin: 5,
+    width: 120,
+    flex: 1,
+    alignItems: "center", // Center text horizontally
+    justifyContent: "center", // Center text vertically
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.1)",
-    borderRadius: 4,
-    shadowColor: "rgba(0, 0, 0, 0.02)",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
-    color: "rgba(0, 0, 0, 0.85)",
-    fontFamily:
-      'system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif',
-    fontSize: 16,
-    fontWeight: "600",
-    lineHeight: 1.25,
-    marginVertical: 5,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+  buttonText: {
+    color: "#FFFFFF",
     textAlign: "center",
-    textDecoration: "none",
-    transition: "all 250ms",
-    userSelect: "none",
-    WebkitUserSelect: "none",
-    touchAction: "manipulation",
-    width: "auto",
   },
 });
 
