@@ -1,7 +1,7 @@
 // services/taskService.js
 
 import axios from "axios";
-import API_URL from "../data/api";
+import { API_URL } from "../data/api";
 
 const taskService = {
   getAllTasks: async () => {
