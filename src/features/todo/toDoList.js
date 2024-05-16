@@ -2,11 +2,17 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable, FlatList } from "react-native";
 import taskService from "../../services/taskServices";
-
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "../../style/toDoListStyle";
 import { useTaskContext } from "../../context/TasksContext";
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Calendar from "./../../components/calender";
+import Profile from "../../pages/Profile";
 
-const ToDoList = () => {
+const Tab = createBottomTabNavigator();
+
+export const ToDoList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [editingIndex, setEditingIndex] = useState("");
   const [editedTask, setEditedTask] = useState("");
@@ -143,4 +149,62 @@ const ToDoList = () => {
   );
 };
 
-export default ToDoList;
+const ToDoListWithBottomNavigation = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="TodoList"
+        component={ToDoList}
+        options={{
+          tabBarLabel: "Todos",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <AntDesign name="calendar" size={24} color="#7CB9E8" />
+            ) : (
+              <AntDesign name="calendar" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="calendar"
+        component={Calendar}
+        options={{
+          tabBarLabel: "Calendar",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <AntDesign name="calendar" size={24} color="#7CB9E8" />
+            ) : (
+              <AntDesign name="calendar" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialCommunityIcons
+                name="account-details"
+                size={24}
+                color="#7CB9E8"
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="account-details"
+                size={24}
+                color="black"
+              />
+            ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
+export default ToDoListWithBottomNavigation;

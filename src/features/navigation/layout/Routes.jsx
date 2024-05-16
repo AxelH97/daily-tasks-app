@@ -25,12 +25,12 @@ export default function Routes() {
               if (route.isProtected && !user.isLoggedIn && user.email !== "") {
                 return {
                   screen: route.redirectTo,
-                  headerShown: false,
+                  // headerShown: false,
                 };
               }
-              return {
-                headerShown: false,
-              };
+              // return {
+              //   headerShown: false,
+              // };
             }}
           />
         ))}
