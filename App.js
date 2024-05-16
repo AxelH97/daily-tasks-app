@@ -1,15 +1,10 @@
 import React from "react";
 import AppProvider from "./src/context/AppProvider";
-
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import Timer from "./src/components/timer";
-
+import Routes from "./src/features/navigation/layout/Routes";
 const App = () => {
   return (
     <AppProvider>
-      <SafeAreaProvider>
-        <Timer />
-      </SafeAreaProvider>
+      <Routes />
     </AppProvider>
   );
 };
