@@ -8,6 +8,7 @@ const paths = {
   todos: "todos",
   calendar: "calendar",
   timer: "timer",
+  stopWatch: "stopwatch",
   notepad: "notepad",
 };
 

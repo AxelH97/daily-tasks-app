@@ -3,15 +3,9 @@ const developmentMode = process.env.NODE_ENV === "development";
 const productionMode = process.env.NODE_ENV === "production";
 
 const API_URL = developmentMode
-  ? `http://192.168.0.67:4445`
-  : `http://localhost:4445`;
+  ? `http://${DEVELOPER_IP}:4444`
+  : `http://${MOBILE_IP}:4444`;
 
-console.log("Environment Variables:", {
-  developmentMode,
-  productionMode,
-  DEVELOPER_IP,
-  MOBILE_IP,
-});
 console.log("API_URL:", API_URL);
 
 const endpoints = {
