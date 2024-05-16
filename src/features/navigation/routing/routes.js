@@ -35,12 +35,12 @@ const useRoutes = () => {
       component: ResetPassword,
     },
 
-    {
+    /*  {
       path: paths.profile,
       component: Profile,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
-    },
+    }, */
     {
       path: paths.todos,
       component: ToDoList,
@@ -67,12 +67,12 @@ const useRoutes = () => {
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },*/
-    {
+    /* {
       path: paths.stopWatch,
       component: StopWatch,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
-    },
+    }, */
   ];
   return routes;
 };

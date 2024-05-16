@@ -1,12 +1,12 @@
 // services/taskService.js
 
 import axios from "axios";
-import API_URL from "../data/api";
-
+import { API_URL } from "../data/api";
+console.log("API_URL!:", API_URL);
 const taskService = {
   getAllTasks: async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}/tasks`);
       return response.data;
     } catch (error) {
       console.error("Error retrieving tasks:", error);
@@ -16,7 +16,7 @@ const taskService = {
 
   createTask: async (title) => {
     try {
-      const response = await axios.post(API_URL, { title });
+      const response = await axios.post(`${API_URL}/tasks`, { title });
       return response.data;
     } catch (error) {
       console.error("Error retrieving tasks:", error);
@@ -26,7 +26,7 @@ const taskService = {
 
   deleteTask: async (id) => {
     try {
-      const response = await axios.delete(`${API_URL}/${id}`);
+      const response = await axios.delete(`${`${API_URL}/tasks`}/${id}`);
       return response.data;
     } catch (error) {
       console.error("Error deleting tasks:", error);
@@ -36,7 +36,7 @@ const taskService = {
 
   updateTask: async (id, updatedTitle) => {
     try {
-      const response = await axios.put(`${API_URL}/${id}`, {
+      const response = await axios.put(`${`${API_URL}/tasks`}/${id}`, {
         title: updatedTitle,
       });
       return response.data;

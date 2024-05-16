@@ -7,6 +7,8 @@ const API_URL = developmentMode
   : `http://${MOBILE_IP}:4444`;
 
 console.log("API_URL:", API_URL);
+console.log("DEVELOPER_IP:", DEVELOPER_IP);
+console.log("MOBILE_IP:", MOBILE_IP);
 
 const endpoints = {
   register: `${API_URL}/users/register`,
