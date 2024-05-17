@@ -13,6 +13,7 @@ import { Entypo } from "@expo/vector-icons";
 import StopWatch from "../../components/StopWatch";
 import { Ionicons } from "@expo/vector-icons";
 import Timer from "../../components/timer";
+import Home from "../../pages/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -233,6 +234,21 @@ const ToDoListWithBottomNavigation = () => {
                 size={24}
                 color="black"
               />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: "Home",
+          tabBarLabelStyle: { color: "#7CB9E8" },
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
+            ) : (
+              <MaterialCommunityIcons name="home" size={24} color="black" />
             ),
         }}
       />
