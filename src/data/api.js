@@ -21,6 +21,7 @@ const endpoints = {
   calendar: `${API_URL}/calendar`,
   timer: `${API_URL}/timer`,
   notepad: `${API_URL}/notepad`,
+  profiePage:`${API_URL}/users/:id`
 };
 
 export { endpoints, API_URL, productionMode };

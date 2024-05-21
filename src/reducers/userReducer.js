@@ -11,6 +11,7 @@ const userReducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
+   
         isLoggedIn: true,
       };
     case "logout":

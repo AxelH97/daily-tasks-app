@@ -10,6 +10,7 @@ const paths = {
   timer: "timer",
   stopWatch: "stopwatch",
   notepad: "notepad",
+  profiePage: "profiePage",
 };
 
 export { paths };

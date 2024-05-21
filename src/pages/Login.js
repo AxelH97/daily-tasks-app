@@ -47,8 +47,9 @@ const Login = () => {
       }
 
       const data = response.data;
-      console.log(data);
-      dispatchUser({ type: "login_success", payload: data });
+    
+      const id=data.user._id
+      dispatchUser({ type: "login_success", payload: {data, id:id} }); 
       navigation.navigate(paths.todos);
     } catch (error) {
       console.error("login failed:", error);
