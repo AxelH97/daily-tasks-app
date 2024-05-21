@@ -7,6 +7,7 @@ import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
 import Stopwatch from "../../../components/StopWatch";
+import ProfiePage from "../../../pages/ProfilePage";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
@@ -44,6 +45,12 @@ const useRoutes = () => {
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
+    {
+      path: paths.profiePage,
+      component: ProfiePage,
+      isProtected: !user.isLoggedIn,
+      redirectTo: paths.login,
+    }
 
     /*{
       path: paths.calendar,
@@ -64,7 +71,7 @@ const useRoutes = () => {
       component: Notepad,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
-    },*/
+    },*/,
     {
       path: paths.stopWatch,
       component: Stopwatch,
