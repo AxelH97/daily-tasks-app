@@ -16,6 +16,7 @@ const endpoints = {
   forgotPassword: `${API_URL}/users/forgot-password`,
   resetPassword: `${API_URL}/users/reset-password/:id/:token`,
   logout: `${API_URL}/users/logout`,
+  home: `${API_URL}/users/home`,
   profile: `${API_URL}/users/profile`,
   tasks: `${API_URL}/tasks`,
   calendar: `${API_URL}/calendar`,
