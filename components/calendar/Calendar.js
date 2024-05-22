@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import moment from 'moment'
-import Date from './Date'
+import Date from '../Date'
 
 const Calendar = ({ onSelectDate, selected }) => {
   const [dates, setDates] = useState([])
@@ -11,7 +11,7 @@ const Calendar = ({ onSelectDate, selected }) => {
   // get the dates from today to 10 days from now, format them as strings and store them in state
   const getDates = () => {
     const _dates = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 31; i++) {
       const date = moment().add(i, 'days')
       _dates.push(date)
     }

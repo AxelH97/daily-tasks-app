@@ -1,27 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
-import Calendar from './components/Calendar';
-
-
-
-export default function App() {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+import React from "react";
+import AppProvider from "./src/context/AppProvider";
+import Routes from "./src/features/navigation/layout/Routes";
+const App = () => {
   return (
-    <ImageBackground source={require('./src/image/d-t.png')} style={styles.container}>
-      <View style={styles.container}>
-        <Calendar onSelectDate={setSelectedDate} selected={selectedDate} />
-        <StatusBar style="auto" />
-      </View>
-    </ImageBackground>
+    <AppProvider>
+      <Routes />
+    </AppProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
+export default App;
