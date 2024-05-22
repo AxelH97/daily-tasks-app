@@ -48,16 +48,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    backgroundColor: "#fff",
+    backgroundColor: "#5085ED",
     padding: 10,
     flexWrap: "wrap", // Wrap content to next line if exceeds width
-    backgroundColor: "black",
+    backgroundColor: "#5085ED",
   },
   imageContainer: {
     width: "48%", // Adjust to make space between images
     aspectRatio: 1, // Keep aspect ratio of container
     position: "relative", // Ensure positioning context for absolute elements
-    marginBottom: 10,
+    marginBottom: 15,
     borderRadius: 10,
   },
   image: {
