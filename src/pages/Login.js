@@ -112,7 +112,7 @@ const Login = () => {
           >
             <Text>Keep me logged in</Text>
             <Text
-              onPress={() => navigation.navigate(paths.forgotPassword)}
+              onPress={() => navigation.navigate(paths.resetPassword)}
               style={{ color: "#874CCC", fontWeight: "500" }}
             >
               Forgot Password

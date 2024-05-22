@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { paths } from "../features/navigation/routing/paths";
 
@@ -8,7 +8,7 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.welcomeText}>Daily-Tasks</Text>
+      <Image source={require("../image/d-t-removebg-preview.png")} />
       <Text style={styles.subText}>Organize your day, achieve your goals.</Text>
       <View style={styles.buttonRow}>
         <TouchableOpacity onPress={() => navigation.navigate(paths.register)}>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: "#1e90ff",
   },
   welcomeText: {
     fontSize: 24,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonContainer: {
-    backgroundColor: "#874CCC",
+    backgroundColor: "#9763B4",
     padding: 10,
     margin: 5,
     width: 120,
