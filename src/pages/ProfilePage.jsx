@@ -57,7 +57,7 @@ const ProfilePage = () => {
         style={styles.profileImage}
       />
       <Text style={styles.title}>{userData.username}</Text>
-      <Text style={styles.title}>ss{userData.email}</Text>
+      <Text style={styles.title}>{userData.email}</Text>
    
       {/* Add more user details as needed */}
     </View>
