@@ -10,6 +10,7 @@ import Profile from "../../../pages/Profile";
 import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
+import Timer from "../../../components/timer";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
@@ -57,12 +58,12 @@ const useRoutes = () => {
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
-    // {
-    //   path: paths.timer,
-    //   component: Timer,
-    //   isProtected: !user.isLoggedIn,
-    //   redirectTo: paths.login,
-    // },
+    {
+      path: paths.timer,
+      component: Timer,
+      isProtected: !user.isLoggedIn,
+      redirectTo: paths.login,
+    },
 
     // {
     // path: paths.notepad,
