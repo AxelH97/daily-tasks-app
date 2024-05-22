@@ -8,6 +8,7 @@ import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
 import Stopwatch from "../../../components/StopWatch";
 import profilePage from "../../../pages/ProfilePage";
+import ImageUploader from "../../../pages/UploaderImage";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
@@ -32,6 +33,11 @@ const useRoutes = () => {
     {
       path: paths.resetPassword,
       component: ResetPassword,
+    }
+    ,
+    {
+      path: paths.uploadimage,
+      component: ImageUploader,
     },
     /*
     {

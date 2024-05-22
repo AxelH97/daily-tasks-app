@@ -7,6 +7,10 @@ export const useUsersContext = () => useContext(usersContext);
 const initialUser = {
   _id: "",
   username: "",
+  avatarImg: {
+    url: "",
+    id: ""
+  },
   email: "",
   isLoggedIn: false,
   userd:null
@@ -14,11 +18,10 @@ const initialUser = {
 
 const UserContextProvider = ({ children }) => {
   const [user, dispatchUser] = useReducer(userReducer, initialUser);
-
- const userInfo=user.userd
+const avatarImg=user.avatarImg
 
   return (
-    <usersContext.Provider value={{ user,userInfo, dispatchUser }}>
+    <usersContext.Provider value={{ user,avatarImg, dispatchUser }}>
       {children}
     </usersContext.Provider>
   );

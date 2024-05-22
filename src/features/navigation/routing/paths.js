@@ -11,6 +11,7 @@ const paths = {
   stopWatch: "stopwatch",
   notepad: "notepad",
   profilePage: "profilePage",
+  uploadimage:"uploadimage"
 };
 
 export { paths };

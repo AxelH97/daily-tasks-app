@@ -50,7 +50,7 @@ const Login = () => {
       console.log(data,"sfs")
     const id=data.user._id
       dispatchUser({ type: "login_success", payload: {user:data, id:id}});
-      navigation.navigate(paths.profilePage);
+      navigation.navigate(paths.uploadimage);
     } catch (error) {
       console.error(error);
       Alert.alert("Login Failed");
