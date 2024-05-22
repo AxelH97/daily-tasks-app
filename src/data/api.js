@@ -4,10 +4,11 @@ const productionMode = process.env.NODE_ENV === "production";
 
 const API_URL = developmentMode
   ? `http://${DEVELOPER_IP}:4444`
-  : `http://${MOBILE_IP}:4444`
-  ;
+  : `http://${MOBILE_IP}:4444`;
 
-console.log('API_URL:', API_URL);
+console.log("API_URL:", API_URL);
+console.log("DEVELOPER_IP:", DEVELOPER_IP);
+console.log("MOBILE_IP:", MOBILE_IP);
 
 const endpoints = {
   register: `${API_URL}/users/register`,
@@ -15,11 +16,13 @@ const endpoints = {
   forgotPassword: `${API_URL}/users/forgot-password`,
   resetPassword: `${API_URL}/users/reset-password/:id/:token`,
   logout: `${API_URL}/users/logout`,
+  home: `${API_URL}/users/home`,
   profile: `${API_URL}/users/profile`,
   tasks: `${API_URL}/tasks`,
   calendar: `${API_URL}/calendar`,
   timer: `${API_URL}/timer`,
   notepad: `${API_URL}/notepad`,
+  profilePage:`${API_URL}/users/:id`
 };
 
 export { endpoints, API_URL, productionMode };

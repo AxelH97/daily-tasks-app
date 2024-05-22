@@ -19,7 +19,7 @@ import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
-  const { user, dispatchUser } = useUsersContext();
+  const { dispatchUser } = useUsersContext();
   const [secureEntry, setSecureEntry] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,11 +47,12 @@ const Login = () => {
       }
 
       const data = response.data;
-      console.log(data);
-      dispatchUser({ type: "login_success", payload: data });
-      navigation.navigate(paths.todos);
+      console.log(data.user._id, "sfs");
+      const id = data.user._id;
+      dispatchUser({ type: "login_success", payload: { user: data, id: id } });
+      navigation.navigate(paths.profilePage);
     } catch (error) {
-      console.error(error);
+      console.error("login failed:", error);
       Alert.alert("Login Failed");
     }
   };
@@ -112,7 +113,7 @@ const Login = () => {
           >
             <Text>Keep me logged in</Text>
             <Text
-              onPress={() => navigation.navigate(paths.forgotPassword)}
+              onPress={() => navigation.navigate(paths.resetPassword)}
               style={{ color: "#874CCC", fontWeight: "500" }}
             >
               Forgot Password

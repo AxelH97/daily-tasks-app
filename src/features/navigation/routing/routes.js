@@ -6,7 +6,12 @@ import ForgotPassword from "../../../pages/ForgotPassword";
 import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
-import Stopwatch from "../../../../components/StopWatch";
+import Stopwatch from "../../../components/StopWatch";
+import profilePage from "../../../pages/ProfilePage";
+import Calendar from "../../../components/Calendar";
+import StopWatch from "../../../components/StopWatch";
+import Home from "../../../pages/Home";
+import Timer from "../../../components/timer";
 
 const useRoutes = () => {
   const { user } = useUsersContext();
@@ -32,42 +37,44 @@ const useRoutes = () => {
       path: paths.resetPassword,
       component: ResetPassword,
     },
-    /*
     {
-      path: paths.profile,
-      component: Profile,
-      isProtected: !user.isLoggedIn,
-      redirectTo: paths.login,
-    },*/ {
+      path: paths.home,
+      component: Home,
+    },
+    {
       path: paths.todos,
       component: ToDoList,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
-
-    /*{
+    {
+      path: paths.profilePage,
+      component: profilePage,
+      isProtected: !user.isLoggedIn,
+      redirectTo: paths.login,
+    },
+    {
       path: paths.calendar,
       component: Calendar,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
-    /*{
+    {
       path: paths.timer,
       component: Timer,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
 
-    
-    {
-      path: paths.notepad,
-      component: Notepad,
-      isProtected: !user.isLoggedIn,
-      redirectTo: paths.login,
-    },*/
+    // {
+    // path: paths.notepad,
+    // component: Notepad,
+    // isProtected: !user.isLoggedIn,
+    // redirectTo: paths.login,
+    // },
     {
       path: paths.stopWatch,
-      component: Stopwatch,
+      component: StopWatch,
       isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },

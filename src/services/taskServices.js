@@ -1,51 +1,51 @@
-// services/taskService.js
+//  services/taskService.js
+//  import axios from "axios"; import API_URL from "../data/api";
 
-import axios from "axios";
+// import axios from "axios";
+// import { API_URL } from "../data/api";
+console.log("API_URL!:", API_URL);
+// const taskService = {
+//   getAllTasks: async () => {
+//     try {
+//       const response = await axios.get(`${API_URL}/tasks`);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error retrieving tasks:", error);
+//       throw error;
+//     }
+//    },
 
-const baseURL = "http://localhost:4444/tasks";
+//   createTask: async (title) => {
+//     try {
+//       const response = await axios.post(`${API_URL}/tasks`, { title });
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error retrieving tasks:", error);
+//       throw error;
+//     }
+//   },
 
-const taskService = {
-  getAllTasks: async () => {
-    try {
-      const response = await axios.get(baseURL);
-      return response.data;
-    } catch (error) {
-      console.error("Fehler beim Abrufen der Aufgaben:", error);
-      throw error;
-    }
-  },
+//   deleteTask: async (id) => {
+//     try {
+//       const response = await axios.delete(`${`${API_URL}/tasks`}/${id}`);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error deleting tasks:", error);
+//       throw error;
+//     }
+//   },
 
-  createTask: async (title) => {
-    try {
-      const response = await axios.post(baseURL, { title });
-      return response.data;
-    } catch (error) {
-      console.error("Fehler beim Hinzufügen der Aufgabe:", error);
-      throw error;
-    }
-  },
+//   updateTask: async (id, updatedTitle) => {
+//     try {
+//       const response = await axios.put(`${`${API_URL}/tasks`}/${id}`, {
+//         title: updatedTitle,
+//       });
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error updating tasks:", error);
+//       throw error;
+//     }
+//   },
+// };
 
-  deleteTask: async (id) => {
-    try {
-      const response = await axios.delete(`${baseURL}/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error("Fehler beim Löschen der Aufgabe:", error);
-      throw error;
-    }
-  },
-
-  updateTask: async (id, updatedTitle) => {
-    try {
-      const response = await axios.put(`${baseURL}/${id}`, {
-        title: updatedTitle,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Fehler beim Aktualisieren der Aufgabe:", error);
-      throw error;
-    }
-  },
-};
-
-export default taskService;
+//  export default taskService;
