@@ -8,7 +8,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const { user } = useUsersContext();
-  console.log(user.user.id);
+ 
 
   useEffect(() => {
     const getUserById = async () => {
