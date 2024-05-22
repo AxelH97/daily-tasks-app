@@ -47,7 +47,7 @@ const Login = () => {
       }
 
       const data = response.data;
-      console.log(data.user._id,"sfs")
+      console.log(data,"sfs")
     const id=data.user._id
       dispatchUser({ type: "login_success", payload: {user:data, id:id}});
       navigation.navigate(paths.profilePage);

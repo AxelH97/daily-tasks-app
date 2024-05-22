@@ -19,7 +19,7 @@ const ProfilePage = () => {
           throw new Error('Failed to fetch profile data');
         }
         const data = await response.data;
-        console.log("data" + data.username);
+
         setUserData(data);
         setLoading(false);
       } catch (error) {
@@ -58,6 +58,7 @@ const ProfilePage = () => {
       />
       <Text style={styles.title}>{userData.username}</Text>
       <Text style={styles.title}>ss{userData.email}</Text>
+ 
    
       {/* Add more user details as needed */}
     </View>
