@@ -8,17 +8,17 @@ const initialUser = {
   _id: "",
   username: "",
   email: "",
-  isLoggedIn: false,
-  userd:null
+  isLoggedIn: false
+
 };
 
 const UserContextProvider = ({ children }) => {
   const [user, dispatchUser] = useReducer(userReducer, initialUser);
 
- const userInfo=user.userd
+
 
   return (
-    <usersContext.Provider value={{ user,userInfo, dispatchUser }}>
+    <usersContext.Provider value={{ user, dispatchUser }}>
       {children}
     </usersContext.Provider>
   );
