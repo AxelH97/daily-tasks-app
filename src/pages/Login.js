@@ -47,10 +47,10 @@ const Login = () => {
       }
 
       const data = response.data;
-    
-      const id=data.user._id
-      dispatchUser({ type: "login_success", payload: {data, id:id} });
-      navigation.navigate(paths.todos);
+      console.log(data.user._id,"sfs")
+    const id=data.user._id
+      dispatchUser({ type: "login_success", payload: {user:data, id:id}});
+      navigation.navigate(paths.profilePage);
     } catch (error) {
       console.error(error);
       Alert.alert("Login Failed");
