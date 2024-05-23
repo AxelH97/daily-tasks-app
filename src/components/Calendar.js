@@ -21,6 +21,7 @@ const Calendar = ({ onSelectDate, selected }) => {
   useEffect(() => {
     getDates()
   }, [])
+  
 
   /**
    * scrollPosition is the number of pixels the user has scrolled
