@@ -8,7 +8,6 @@ import { useTaskContext } from "../../context/TasksContext";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Calendar from "../../components/Calendar";
-import Profile from "../../pages/Profile";
 import { Entypo } from "@expo/vector-icons";
 import StopWatch from "../../components/StopWatch";
 import { Ionicons } from "@expo/vector-icons";
