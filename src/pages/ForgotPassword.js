@@ -14,10 +14,14 @@ const ForgotPassword = () => {
   const navigation = useNavigation();
 
   const fetchData = async () => {
+    console.log("user:", user);
     try {
-      const response = await axios.post(`${API_URL}/users/forgot-password`, {
-        email: email,
-      });
+      const response = await axios.post(
+        `${API_URL}/users/forgot-password/${user.id}`,
+        {
+          email: email,
+        }
+      );
 
       const data = response.data;
       console.log(data);

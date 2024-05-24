@@ -8,7 +8,6 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const { user } = useUsersContext();
- 
 
   useEffect(() => {
     const getUserById = async () => {
@@ -16,7 +15,7 @@ const ProfilePage = () => {
         const response = await axios.get(`${API_URL}/users/${user.user.id}`);
         console.log("res", response);
         if (!response.status === 200) {
-          throw new Error('Failed to fetch profile data');
+          throw new Error("Failed to fetch profile data");
         }
         const data = await response.data;
         console.log("data" + data.username);
@@ -52,13 +51,17 @@ const ProfilePage = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: userData.avatarImg.url }}
-        style={styles.profileImage}
-      />
+      {userData.avatarImg?.url ? (
+        <Image
+          source={{ uri: userData.avatarImg.url }}
+          style={styles.profileImage}
+        />
+      ) : (
+        <Text>No profile image available</Text>
+      )}
       <Text style={styles.title}>{userData.username}</Text>
       <Text style={styles.title}>ss{userData.email}</Text>
-   
+
       {/* Add more user details as needed */}
     </View>
   );
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
   },
   profileImage: {
     width: 120,

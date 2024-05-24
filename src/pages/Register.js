@@ -19,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 import { paths } from "../features/navigation/routing/paths";
 import { API_URL } from "../data/api";
 import axios from "axios";
+import { useUsersContext } from "../context/UserContext";
 
 const Register = () => {
   const [secureEntry, setSecureEntry] = useState(true);
@@ -26,6 +27,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const { user } = useUsersContext();
 
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
@@ -46,7 +48,7 @@ const Register = () => {
       Alert.alert("Signup Failed");
     }
   };
-
+  console.log("User:", user);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 80 }}>

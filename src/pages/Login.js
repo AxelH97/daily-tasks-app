@@ -50,7 +50,7 @@ const Login = () => {
       console.log(data.user._id, "sfs");
       const id = data.user._id;
       dispatchUser({ type: "login_success", payload: { user: data, id: id } });
-      navigation.navigate(paths.profilePage);
+      navigation.navigate(paths.todos);
     } catch (error) {
       console.error("login failed:", error);
       Alert.alert("Login Failed");
@@ -113,7 +113,7 @@ const Login = () => {
           >
             <Text>Keep me logged in</Text>
             <Text
-              onPress={() => navigation.navigate(paths.resetPassword)}
+              onPress={() => navigation.navigate(paths.forgotPassword)}
               style={{ color: "#874CCC", fontWeight: "500" }}
             >
               Forgot Password
