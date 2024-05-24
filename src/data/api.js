@@ -14,7 +14,7 @@ const endpoints = {
   register: `${API_URL}/users/register`,
   login: `${API_URL}/users/login`,
   forgotPassword: `${API_URL}/users/forgot-password`,
-  resetPassword: `${API_URL}/users/reset-password/:id/:token`,
+  resetPassword: `${API_URL}/users/reset-password/:id`,
   logout: `${API_URL}/users/logout`,
   home: `${API_URL}/users/home`,
   profile: `${API_URL}/users/profile`,
@@ -22,7 +22,7 @@ const endpoints = {
   calendar: `${API_URL}/calendar`,
   timer: `${API_URL}/timer`,
   notepad: `${API_URL}/notepad`,
-  profilePage:`${API_URL}/users/:id`
+  profilePage: `${API_URL}/users/:id`,
 };
 
 export { endpoints, API_URL, productionMode };
