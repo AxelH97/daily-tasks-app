@@ -6,8 +6,7 @@ import ForgotPassword from "../../../pages/ForgotPassword";
 import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
-import Stopwatch from "../../../components/StopWatch";
-import profilePage from "../../../pages/ProfilePage";
+import ProfilePage from "../../../pages/ProfilePage";
 import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
@@ -40,42 +39,37 @@ const useRoutes = () => {
     {
       path: paths.home,
       component: Home,
+      isProtected: true,
+      redirectTo: paths.login,
     },
     {
       path: paths.todos,
       component: ToDoList,
-      isProtected: !user.isLoggedIn,
+      isProtected: true,
       redirectTo: paths.login,
     },
     {
       path: paths.profilePage,
-      component: profilePage,
-      isProtected: !user.isLoggedIn,
+      component: ProfilePage,
+      isProtected: true,
       redirectTo: paths.login,
     },
     {
       path: paths.calendar,
       component: Calendar,
-      isProtected: !user.isLoggedIn,
+      isProtected: true,
       redirectTo: paths.login,
     },
     {
       path: paths.timer,
       component: Timer,
-      isProtected: !user.isLoggedIn,
+      isProtected: true,
       redirectTo: paths.login,
     },
-
-    // {
-    // path: paths.notepad,
-    // component: Notepad,
-    // isProtected: !user.isLoggedIn,
-    // redirectTo: paths.login,
-    // },
     {
       path: paths.stopWatch,
       component: StopWatch,
-      isProtected: !user.isLoggedIn,
+      isProtected: true,
       redirectTo: paths.login,
     },
   ];
