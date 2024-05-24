@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import moment from 'moment'
-
+import Date from './Date'
 
 const Calendar = ({ onSelectDate, selected }) => {
   const [dates, setDates] = useState([])
@@ -21,6 +21,7 @@ const Calendar = ({ onSelectDate, selected }) => {
   useEffect(() => {
     getDates()
   }, [])
+  
 
   /**
    * scrollPosition is the number of pixels the user has scrolled

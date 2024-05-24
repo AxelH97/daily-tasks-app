@@ -60,7 +60,7 @@ const ProfilePage = () => {
         <Text>No profile image available</Text>
       )}
       <Text style={styles.title}>{userData.username}</Text>
-      <Text style={styles.title}>ss{userData.email}</Text>
+      <Text style={styles.title}>{userData.email}</Text>
 
       {/* Add more user details as needed */}
     </View>
