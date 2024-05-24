@@ -14,6 +14,7 @@ import StopWatch from "../../components/StopWatch";
 import { Ionicons } from "@expo/vector-icons";
 import Timer from "../../components/timer";
 import Home from "../../pages/Home";
+import ProfilePage from "../../pages/ProfilePage";
 
 const Tab = createBottomTabNavigator();
 
@@ -216,7 +217,7 @@ const ToDoListWithBottomNavigation = () => {
 
       <Tab.Screen
         name="profile"
-        component={Profile}
+        component={ProfilePage}
         options={{
           tabBarLabel: "Profile",
           tabBarLabelStyle: { color: "#7CB9E8" },
