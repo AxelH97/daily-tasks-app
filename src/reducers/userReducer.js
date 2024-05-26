@@ -13,10 +13,10 @@ const userReducer = (state, action) => {
         user: action.payload,
         isLoggedIn: true,
       };
-    case "logout":
-      return {
-        ...initialState,
-      };
+    // case "logout":
+    //   return {
+    //     ...initialState,
+    //   };
     case "reset_password":
       return {
         ...state,
@@ -28,15 +28,15 @@ const userReducer = (state, action) => {
         ...newState,
         isLoggedIn: true,
       };
-    // case "logout":
-    //   return {
-    //     ...state,
-    //     _id: "",
-    //     username: "",
-    //     email: "",
-    //     isLoggedIn: false,
-    //     userd: null,
-    //   };
+    case "logout":
+      return {
+        ...state,
+        _id: "",
+        username: "",
+        email: "",
+        isLoggedIn: false,
+        userd: null,
+      };
     default:
       break;
   }
