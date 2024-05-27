@@ -1,6 +1,14 @@
 const userReducer = (state, action) => {
   console.log(action);
   switch (action.type) {
+    case "register":
+      return {
+        ...state,
+        _id: action.payload._id,
+        username: action.payload.username,
+        email: action.payload.email,
+        isLoggedIn: true,
+      };
     case "login":
       return {
         ...state,
@@ -9,8 +17,8 @@ const userReducer = (state, action) => {
       };
     case "login_success":
       return {
-        ...state,
-        user: action.payload,
+        // ...state,
+        state: action.payload,
         isLoggedIn: true,
       };
     case "logout":
