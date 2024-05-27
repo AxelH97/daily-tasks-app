@@ -9,8 +9,7 @@ const userReducer = (state, action) => {
       };
     case "login_success":
       return {
-        ...state,
-        user: action.payload,
+        state: action.payload,
         isLoggedIn: true,
       };
     // case "logout":
