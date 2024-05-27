@@ -51,7 +51,7 @@ export default function ImageUploader() {
         method: 'PUT',
         body: formData,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json',
         },
       });
 
