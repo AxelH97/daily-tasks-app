@@ -43,7 +43,7 @@ const DrawerContent = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${uer.user.id}`, {
+      const response = await axios.delete(`${API_URL}/users/${user.user.id}`, {
         headers: {
           "Content-Type": "application/json",
         },
