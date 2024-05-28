@@ -11,10 +11,12 @@ import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
 import Timer from "../../../components/timer";
+import CalendarComponent from "../../../components/Calendar"
 
 const useRoutes = () => {
   const { user } = useUsersContext();
   const routes = [
+    
     {
       path: paths.welcomescreen,
       component: WelcomeScreen,
