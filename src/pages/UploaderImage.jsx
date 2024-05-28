@@ -33,7 +33,6 @@ export default function ImageUploader() {
       name: "photo.jpg",
       type: "image/jpeg",
     });
-<<<<<<< HEAD
 
 
 
@@ -43,16 +42,6 @@ export default function ImageUploader() {
         body: formData
       });
 
-=======
-    try {
-      const response = await fetch(
-        `${API_URL}/users/upload-avatar/${user.id}`,
-        {
-          method: "PUT",
-          body: formData,
-        }
-      );
->>>>>>> dev
       if (response.ok) {
         const responseData = await response.json();
         const data = response.data;
