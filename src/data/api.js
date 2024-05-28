@@ -3,8 +3,8 @@ const developmentMode = process.env.NODE_ENV === "development";
 const productionMode = process.env.NODE_ENV === "production";
 
 const API_URL = developmentMode
-  ? `http://${DEVELOPER_IP}:4444`
-  : `http://${MOBILE_IP}:4444`;
+  ? `http://${DEVELOPER_IP}:4445`
+  : `http://${MOBILE_IP}:4445`;
 
 console.log("API_URL:", API_URL);
 console.log("DEVELOPER_IP:", DEVELOPER_IP);
@@ -22,6 +22,7 @@ const endpoints = {
   timer: `${API_URL}/timer`,
   notepad: `${API_URL}/notepad`,
   profilePage: `${API_URL}/users/:id`,
+  uploadimage: `${API_URL}/users/:id`,
 };
 
 export { endpoints, API_URL, productionMode };

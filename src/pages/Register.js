@@ -36,10 +36,24 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [buttonText, setButtonText] = useState("Register");
   const navigation = useNavigation();
-  const { user } = useUsersContext();
 
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
+  };
+
+  const handleUsernameChange = (text) => {
+    setUsername(text);
+    setIsUsernameValid(text.length >= 3); // Basic username validation
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    setIsEmailValid(text.includes("@")); // Basic email validation
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    setIsPasswordValid(text.length >= 8); // Basic password validation
   };
 
   const fetchData = async () => {
@@ -75,7 +89,7 @@ const Register = () => {
       );
     }
   };
-  console.log("User:", user);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 80 }}>

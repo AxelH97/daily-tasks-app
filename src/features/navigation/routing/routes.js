@@ -11,12 +11,11 @@ import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
 import Timer from "../../../components/timer";
-import CalendarComponent from "../../../components/Calendar"
-
+import CalendarComponent from "../../../components/Calendar";
+import ImageUploader from "../../../pages/UploaderImage";
 const useRoutes = () => {
   const { user } = useUsersContext();
   const routes = [
-    
     {
       path: paths.welcomescreen,
       component: WelcomeScreen,
@@ -29,7 +28,6 @@ const useRoutes = () => {
       path: paths.login,
       component: Login,
     },
-
     {
       path: paths.forgotPassword,
       component: ForgotPassword,
@@ -73,6 +71,10 @@ const useRoutes = () => {
       component: StopWatch,
       isProtected: true,
       redirectTo: paths.login,
+    },
+    {
+      path: paths.uploadimage,
+      component: ImageUploader,
     },
   ];
   return routes;
