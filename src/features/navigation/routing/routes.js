@@ -58,8 +58,8 @@ const useRoutes = () => {
     },
     {
       path: paths.calendar,
-      component: Calendar,
-      isProtected: true,
+      component: CalendarComponent,
+      isProtected: !user.isLoggedIn,
       redirectTo: paths.login,
     },
     {
