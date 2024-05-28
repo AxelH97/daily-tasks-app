@@ -16,13 +16,8 @@
     "@react-navigation/stack": "^6.3.29",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
-<<<<<<< HEAD
-    "expo": "~51.0.6",
-    "expo-image-picker": "~15.0.5",
-=======
     "expo": "~51.0.8",
     "expo-image-picker": "^15.0.5",
->>>>>>> dev
     "expo-status-bar": "~1.12.1",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
@@ -37,10 +32,7 @@
     "react-native-gesture-handler": "~2.16.1",
     "react-native-image-picker": "^7.1.2",
     "react-native-paper": "^5.12.3",
-<<<<<<< HEAD
-=======
     "react-native-reanimated": "~3.10.1",
->>>>>>> dev
     "react-native-web": "^0.19.10"
   },
   "devDependencies": {
