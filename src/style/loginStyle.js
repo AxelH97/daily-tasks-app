@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     color: "gray",
     marginVertical: 10,
     width: 250,
-    fontSize: 17,
+    fontSize: 15,
   },
   passwordContainer: {
     flexDirection: "row",

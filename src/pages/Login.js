@@ -8,13 +8,11 @@ import {
   Pressable,
   TouchableOpacity,
   Alert,
-  ScrollView, 
-  Platform, 
+  ScrollView,
+  Platform,
 } from "react-native";
-import { MaterialIcons,} from "@expo/vector-icons";
-import { MaterialCommunityIcons} from "@expo/vector-icons";
-
-MaterialCommunityIcons 
+import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../style/loginStyle";
 import { useNavigation } from "@react-navigation/native";
 import { paths } from "../features/navigation/routing/paths";
@@ -56,14 +54,14 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-console.log('response:',response);
+
       if (response.status !== 200) {
         const errorData = response.data;
         throw new Error(errorData.message || "Login failed");
       }
 
       const data = response.data;
-      console.log('data:',data);
+      console.log("data:", data);
       dispatchUser({ type: "login_success", payload: data });
       navigation.navigate(paths.todos);
     } catch (error) {
