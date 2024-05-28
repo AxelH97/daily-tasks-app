@@ -15,7 +15,7 @@ const taskService = {
   },
   createTask: async (title) => {
     try {
-      const response = await axios.post(`${API_URL}/tasks`, { title });
+      const response = await axios.post(`${API_URL}/tasks/addTask`, { title });
       return response.data;
     } catch (error) {
       console.error("Error retrieving tasks:", error);
