@@ -28,7 +28,6 @@ export default function ImageUploader() {
       setImage(result.assets[0].uri);
     }
   };
-
   const uploadImage = async () => {
     if (!image) return;
 
@@ -41,17 +40,12 @@ export default function ImageUploader() {
       type: 'image/jpeg',
     });
 
-    const uploadUrl = `${API_URL}/users/upload-avatar/${user.user.id}`;
-    console.log('Uploading to:', uploadUrl);
+
 
     try {
-      const response = await fetch(uploadUrl, {
+      const response = await fetch(`${API_URL}/users/upload-avatar/${user.user.id}`, {
         method: 'PUT',
-        body: formData,
-        headers: {
-          'Accept': 'application/json',
-          // Do not set 'Content-Type' manually
-        },
+        body: formData
       });
 
       if (response.ok) {
