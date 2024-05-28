@@ -16,19 +16,24 @@ const ResetPassword = () => {
   axios.defaults.withCredentials = true;
   const fetchData = async () => {
     try {
-      if (newPassword === confirmPassword) {
+      // if (!user.user.id) {
+      //   console.error("UserID is undefined");
+      //   return;
+      // }
+
+      if (newPassword !== confirmPassword) {
         console.log("Passwords do not match");
         return;
       }
       const response = await axios.post(
-        `${API_URL}/users/reset-password/${user._id}/${token}`,
+        `${API_URL}/users/reset-password/${user.user.id}`,
         {
           newPassword: newPassword,
           confirmPassword: confirmPassword,
         }
       );
       const data = response.data;
-      console.log(data);
+      console.log(data.user);
       dispatchUser({ type: "reset_password", payload: data });
       navigation.navigate(paths.login);
     } catch (error) {
@@ -47,14 +52,12 @@ const ResetPassword = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <MaterialIcons
-          style={styles.icon}
-          name="lock"
-          size={20}
-          color="gray"
+        <MaterialIcons style={styles.icon} name="lock" size={20} color="gray" />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm new password"
           onChangeText={(text) => setConfirmPassword(text)}
         />
-        <TextInput style={styles} placeholder="Confirm new password" />
       </View>
       <Pressable onPress={fetchData} style={styles.buttonContainer}>
         <Text style={styles.buttonText}>Reset Password</Text>
