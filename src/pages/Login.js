@@ -19,41 +19,72 @@ import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
-  const { dispatchUser } = useUsersContext();
+  const { user, dispatchUser } = useUsersContext();
   const [secureEntry, setSecureEntry] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [buttonText, setButtonText] = useState("Login");
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
-
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    setIsEmailValid(text.includes("@"));
+  };
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    setIsPasswordValid(text.length >= 8);
+  };
+  const handleAuthentication = (event) => {
+    event.preventDefault();
+    if (isEmailValid && isPasswordValid) {
+      fetchData();
+    } else {
+      Alert.alert("Invalid input", "Please check your email and password.");
+    }
+  };
   const fetchData = async () => {
+    setLoading(true);
+    setButtonText("Logging in...");
     try {
+      const payload = { userID: user._id };
       const response = await axios.post(
         `${API_URL}/users/login`,
-        {
-          email: email,
-          password: password,
-        },
+        { email, password },
         {
           withCredentials: true,
+          data: JSON.stringify(payload),
         }
       );
-
-      if (!response.status === 200) {
-        const errorData = response.data;
-        throw new Error(errorData.message || "Login failed");
+      if (response.status === 200) {
+        const { user, accesstoken, refreshToken } = response.data;
+        const userId = user._id;
+        console.log("User ID:", userId);
+        console.log("Access Token:", accesstoken);
+        console.log("Refresh Token:", refreshToken);
+        dispatchUser({
+          type: "login_success",
+          payload: {
+            user,
+            id: userId,
+            accesstoken: accesstoken,
+            refreshToken: refreshToken,
+          },
+        });
+        navigation.navigate("home", {
+          userId: userId,
+          accesstoken: accesstoken,
+        });
       }
-
-      const data = response.data;
-      console.log(data.user._id, "sfs");
-      const id = data.user._id;
-      dispatchUser({ type: "login_success", payload: { user: data, id: id } });
-      navigation.navigate(paths.todos);
     } catch (error) {
-      console.error("login failed:", error);
+      console.error("Login failed:", error);
       Alert.alert("Login Failed");
+    } finally {
+      setLoading(false);
+      setButtonText("Login");
     }
   };
 
@@ -75,11 +106,14 @@ const Login = () => {
               color="gray"
             />
             <TextInput
-              style={styles.input}
+              style={[styles.input, !isEmailValid && { borderColor: "red" }]}
               placeholder="enter your email"
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={handleEmailChange}
+              value={email}
+              keyboardType="email-address"
             />
           </View>
+          {!isEmailValid && <Text style={styles.errorText}>Invalid email</Text>}
           <View style={styles.passwordContainer}>
             <MaterialIcons
               style={styles.icon}
@@ -88,21 +122,28 @@ const Login = () => {
               color="gray"
             />
             <TextInput
-              style={styles.input}
+              style={[styles.input, !isPasswordValid && { borderColor: "red" }]}
               placeholder="enter your password"
               secureTextEntry={secureEntry}
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={handlePasswordChange}
+              value={password}
             />
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={toggleSecureEntry}
+              style={{ marginRight: 8 }}
+            >
               <MaterialCommunityIcons
-                onPress={toggleSecureEntry}
-                style={{ marginRight: 8 }}
                 name={secureEntry ? "eye-outline" : "eye-off-outline"}
                 size={24}
                 color="grey"
               />
             </TouchableOpacity>
           </View>
+          {!isPasswordValid && (
+            <Text style={styles.errorText}>
+              Password must be at least 8 characters
+            </Text>
+          )}
           <View
             style={{
               flexDirection: "row",
@@ -112,16 +153,20 @@ const Login = () => {
             }}
           >
             <Text>Keep me logged in</Text>
-            <Text
-              onPress={() => navigation.navigate(paths.forgotPassword)}
-              style={{ color: "#874CCC", fontWeight: "500" }}
-            >
-              Forgot Password
-            </Text>
+            {/* <Text
+                onPress={() => navigation.navigate(paths.forgotPassword)}
+                style={{ color: "#874CCC", fontWeight: "500" }}
+              >
+                Forgot Password
+              </Text> */}
           </View>
           <View style={{ marginTop: 60 }} />
-          <Pressable onPress={fetchData} style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Login</Text>
+          <Pressable
+            onPress={handleAuthentication}
+            style={styles.buttonContainer}
+            disabled={loading}
+          >
+            <Text style={styles.buttonText}>{buttonText}</Text>
           </Pressable>
           <Pressable style={{ marginTop: 15 }}>
             <Text

@@ -10,6 +10,7 @@ import { View, TouchableOpacity, Text, Alert } from "react-native";
 import { paths } from "../../navigation/routing/paths.js";
 import axios from "axios";
 import { MaterialIcons } from "@expo/vector-icons";
+import { ModalPortal } from "react-native-modals";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -143,6 +144,7 @@ export default function Routes() {
           ))}
         </Stack.Navigator>
       )} */}
+      <ModalPortal />
     </NavigationContainer>
   );
 }
