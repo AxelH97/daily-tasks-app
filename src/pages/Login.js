@@ -22,7 +22,7 @@ import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
-  const { dispatchUser } = useUsersContext();
+  const { user, dispatchUser } = useUsersContext();
   const [secureEntry, setSecureEntry] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,40 +34,61 @@ const Login = () => {
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
-
   const handleEmailChange = (text) => {
     setEmail(text);
     setIsEmailValid(text.includes("@"));
   };
-
   const handlePasswordChange = (text) => {
     setPassword(text);
     setIsPasswordValid(text.length >= 8);
   };
-
+  const handleAuthentication = (event) => {
+    event.preventDefault();
+    if (isEmailValid && isPasswordValid) {
+      fetchData();
+    } else {
+      Alert.alert("Invalid input", "Please check your email and password.");
+    }
+  };
   const fetchData = async () => {
     setLoading(true);
     setButtonText("Logging in...");
     try {
+      const payload = { userID: user._id };
       const response = await axios.post(
         `${API_URL}/users/login`,
         { email, password },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          data: JSON.stringify(payload),
+        }
       );
-
-      if (response.status !== 200) {
-        const errorData = response.data;
-        throw new Error(errorData.message || "Login failed");
+      if (response.status === 200) {
+        const { user, accesstoken, refreshToken } = response.data;
+        const userId = user._id;
+        console.log("User ID:", userId);
+        console.log("Access Token:", accesstoken);
+        console.log("Refresh Token:", refreshToken);
+        dispatchUser({
+          type: "login_success",
+          payload: {
+            user,
+            id: userId,
+            accesstoken: accesstoken,
+            refreshToken: refreshToken,
+          },
+        });
+        navigation.navigate("home", {
+          userId: userId,
+          accesstoken: accesstoken,
+        });
       }
-
-      const data = response.data;
-      console.log(data.user._id, "sfs");
-      const id = data.user._id;
-      dispatchUser({ type: "login_success", payload: { user: data, id: id } });
-      navigation.navigate(paths.uploadimage);
     } catch (error) {
-      console.error("login failed:", error);
+      console.error("Login failed:", error);
       Alert.alert("Login Failed");
+    } finally {
+      setLoading(false);
+      setButtonText("Login");
     } finally {
       setLoading(false);
       setButtonText("Login");

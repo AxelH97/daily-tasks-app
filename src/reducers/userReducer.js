@@ -4,15 +4,16 @@ const userReducer = (state, action) => {
     case "login":
       return {
         ...state,
-        [action.field]: action.value,
+        _id: action.userId,
         isLoggedIn: true,
       };
     case "login_success":
       return {
         ...state,
-        user: action.payload,
+        _id: action.payload.user._id,
         isLoggedIn: true,
       };
+
     // case "logout":
     //   return {
     //     ...initialState,
