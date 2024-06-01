@@ -50,32 +50,7 @@ const ToDoList = () => {
   const [marked, setMarked] = useState(false);
   const { user } = useUsersContext();
   const userId = user._id;
-  const suggestions = [
-    //   {
-    //     id: "0",
-    //     todo: "Drink Water, keep healthy",
-    //   },
-    //   {
-    //     id: "1",
-    //     todo: "Go Excercising",
-    //   },
-    //   {
-    //     id: "2",
-    //     todo: "Go to bed early",
-    //   },
-    //   {
-    //     id: "3",
-    //     todo: "Take pill reminder",
-    //   },
-    //   {
-    //     id: "4",
-    //     todo: "Go Shopping",
-    //   },
-    //   {
-    //     id: "5",
-    //     todo: "finish assignments",
-    //   },
-  ];
+  const suggestions = [];
   const addTodo = async () => {
     try {
       const todoData = {
@@ -146,7 +121,7 @@ const ToDoList = () => {
             backgroundColor: "#7CB9E8",
             paddingHorizontal: 10,
             paddingVertical: 6,
-            borderRadius: 20, // Kleinerer Radius für den Button
+            borderRadius: 20,
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -461,104 +436,104 @@ const ToDoList = () => {
 };
 export default ToDoList;
 
-export const ToDoListWithBottomNavigation = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="TodoList"
-        component={ToDoList}
-        options={{
-          tabBarLabel: "Todos",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <AntDesign name="calendar" size={24} color="#7CB9E8" />
-            ) : (
-              <AntDesign name="calendar" size={24} color="black" />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="calendar"
-        component={Calendar}
-        options={{
-          tabBarLabel: "Calendar",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <AntDesign name="calendar" size={24} color="#7CB9E8" />
-            ) : (
-              <AntDesign name="calendar" size={24} color="black" />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="StopWatch"
-        component={StopWatch}
-        options={{
-          tabBarLabel: "Stopwatch",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="stopwatch" size={24} color="#7CB9E8" />
-            ) : (
-              <Entypo name="stopwatch" size={24} color="black" />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Timer"
-        component={Timer}
-        options={{
-          tabBarLabel: "timer",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Ionicons name="timer" size={24} color="#7CB9E8" />
-            ) : (
-              <Ionicons name="timer" size={24} color="black" />
-            ),
-        }}
-      />
+// export const ToDoListWithBottomNavigation = () => {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen
+//         name="TodoList"
+//         component={ToDoList}
+//         options={{
+//           tabBarLabel: "Todos",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <AntDesign name="calendar" size={24} color="#7CB9E8" />
+//             ) : (
+//               <AntDesign name="calendar" size={24} color="black" />
+//             ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="calendar"
+//         component={Calendar}
+//         options={{
+//           tabBarLabel: "Calendar",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <AntDesign name="calendar" size={24} color="#7CB9E8" />
+//             ) : (
+//               <AntDesign name="calendar" size={24} color="black" />
+//             ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="StopWatch"
+//         component={StopWatch}
+//         options={{
+//           tabBarLabel: "Stopwatch",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <Entypo name="stopwatch" size={24} color="#7CB9E8" />
+//             ) : (
+//               <Entypo name="stopwatch" size={24} color="black" />
+//             ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Timer"
+//         component={Timer}
+//         options={{
+//           tabBarLabel: "timer",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <Ionicons name="timer" size={24} color="#7CB9E8" />
+//             ) : (
+//               <Ionicons name="timer" size={24} color="black" />
+//             ),
+//         }}
+//       />
 
-      <Tab.Screen
-        name="profile"
-        component={ProfilePage}
-        options={{
-          tabBarLabel: "Profile",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <MaterialCommunityIcons
-                name="account-details"
-                size={24}
-                color="#7CB9E8"
-              />
-            ) : (
-              <MaterialCommunityIcons
-                name="account-details"
-                size={24}
-                color="black"
-              />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarLabel: "Home",
-          tabBarLabelStyle: { color: "#7CB9E8" },
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
-            ) : (
-              <MaterialCommunityIcons name="home" size={24} color="black" />
-            ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
+//       <Tab.Screen
+//         name="profile"
+//         component={ProfilePage}
+//         options={{
+//           tabBarLabel: "Profile",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           headerShown: false,
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <MaterialCommunityIcons
+//                 name="account-details"
+//                 size={24}
+//                 color="#7CB9E8"
+//               />
+//             ) : (
+//               <MaterialCommunityIcons
+//                 name="account-details"
+//                 size={24}
+//                 color="black"
+//               />
+//             ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Home"
+//         component={Home}
+//         options={{
+//           tabBarLabel: "Home",
+//           tabBarLabelStyle: { color: "#7CB9E8" },
+//           headerShown: false,
+//           tabBarIcon: ({ focused }) =>
+//             focused ? (
+//               <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
+//             ) : (
+//               <MaterialCommunityIcons name="home" size={24} color="black" />
+//             ),
+//         }}
+//       />
+//     </Tab.Navigator>
+//   );
+// };
