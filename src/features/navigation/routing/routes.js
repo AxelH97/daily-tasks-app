@@ -13,6 +13,7 @@ import Home from "../../../pages/Home";
 import Timer from "../../../components/timer";
 import CalendarComponent from "../../../components/Calendar";
 import ImageUploader from "../../../pages/UploaderImage";
+import StatisticIndex from "../../../pages/StatisticIndex";
 const useRoutes = () => {
   const { user } = useUsersContext();
   const routes = [
@@ -45,6 +46,12 @@ const useRoutes = () => {
     {
       path: paths.todos,
       component: ToDoList,
+      isProtected: true,
+      redirectTo: paths.login,
+    },
+    {
+      path: paths.statistic,
+      component: StatisticIndex,
       isProtected: true,
       redirectTo: paths.login,
     },
