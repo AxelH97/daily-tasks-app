@@ -34,14 +34,17 @@ const Login = () => {
   const toggleSecureEntry = () => {
     setSecureEntry((prevSecureEntry) => !prevSecureEntry);
   };
+
   const handleEmailChange = (text) => {
     setEmail(text);
     setIsEmailValid(text.includes("@"));
   };
+
   const handlePasswordChange = (text) => {
     setPassword(text);
     setIsPasswordValid(text.length >= 8);
   };
+
   const handleAuthentication = (event) => {
     event.preventDefault();
     if (isEmailValid && isPasswordValid) {
@@ -50,6 +53,7 @@ const Login = () => {
       Alert.alert("Invalid input", "Please check your email and password.");
     }
   };
+
   const fetchData = async () => {
     setLoading(true);
     setButtonText("Logging in...");
@@ -90,122 +94,110 @@ const Login = () => {
       setLoading(false);
       setButtonText("Login");
     }
+  };
 
-    const handleAuthentication = (event) => {
-      event.preventDefault();
-      if (isEmailValid && isPasswordValid) {
-        fetchData();
-      } else {
-        Alert.alert("Invalid input", "Please check your email and password.");
-      }
-    };
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={{ marginTop: 80 }}>
-          <Text style={styles.title}>Daily-Tasks</Text>
-        </View>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-          <ScrollView keyboardDismissMode="on-drag">
-            <View style={{ alignItems: "center" }}>
-              <Text style={styles.loginText}>Log in to your account</Text>
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={{ marginTop: 80 }}>
+        <Text style={styles.title}>Daily-Tasks</Text>
+      </View>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView keyboardDismissMode="on-drag">
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.loginText}>Log in to your account</Text>
+          </View>
+          <View style={{ marginTop: 70 }}>
+            <View style={styles.inputContainer}>
+              <MaterialIcons
+                style={styles.icon}
+                name="email"
+                size={20}
+                color="gray"
+              />
+              <TextInput
+                style={[styles.input, !isEmailValid && { borderColor: "red" }]}
+                placeholder="enter your email"
+                onChangeText={handleEmailChange}
+                value={email}
+                keyboardType="email-address"
+              />
             </View>
-            <View style={{ marginTop: 70 }}>
-              <View style={styles.inputContainer}>
-                <MaterialIcons
-                  style={styles.icon}
-                  name="email"
-                  size={20}
-                  color="gray"
-                />
-                <TextInput
-                  style={[
-                    styles.input,
-                    !isEmailValid && { borderColor: "red" },
-                  ]}
-                  placeholder="enter your email"
-                  onChangeText={handleEmailChange}
-                  value={email}
-                  keyboardType="email-address"
-                />
-              </View>
-              {!isEmailValid && (
-                <Text style={styles.errorText}>Invalid email</Text>
-              )}
-              <View style={styles.passwordContainer}>
-                <MaterialIcons
-                  style={styles.icon}
-                  name="lock"
-                  size={20}
-                  color="gray"
-                />
-                <TextInput
-                  style={[
-                    styles.input,
-                    !isPasswordValid && { borderColor: "red" },
-                  ]}
-                  placeholder="enter your password"
-                  secureTextEntry={secureEntry}
-                  onChangeText={handlePasswordChange}
-                  value={password}
-                />
-                <TouchableOpacity
-                  onPress={toggleSecureEntry}
-                  style={{ marginRight: 8 }}
-                >
-                  <MaterialCommunityIcons
-                    name={secureEntry ? "eye-outline" : "eye-off-outline"}
-                    size={24}
-                    color="grey"
-                  />
-                </TouchableOpacity>
-              </View>
-              {!isPasswordValid && (
-                <Text style={styles.errorText}>
-                  Password must be at least 8 characters
-                </Text>
-              )}
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: 12,
-                  justifyContent: "space-between",
-                }}
+            {!isEmailValid && (
+              <Text style={styles.errorText}>Invalid email</Text>
+            )}
+            <View style={styles.passwordContainer}>
+              <MaterialIcons
+                style={styles.icon}
+                name="lock"
+                size={20}
+                color="gray"
+              />
+              <TextInput
+                style={[
+                  styles.input,
+                  !isPasswordValid && { borderColor: "red" },
+                ]}
+                placeholder="enter your password"
+                secureTextEntry={secureEntry}
+                onChangeText={handlePasswordChange}
+                value={password}
+              />
+              <TouchableOpacity
+                onPress={toggleSecureEntry}
+                style={{ marginRight: 8 }}
               >
-                <Text>Keep me logged in</Text>
-                {/* <Text
+                <MaterialCommunityIcons
+                  name={secureEntry ? "eye-outline" : "eye-off-outline"}
+                  size={24}
+                  color="grey"
+                />
+              </TouchableOpacity>
+            </View>
+            {!isPasswordValid && (
+              <Text style={styles.errorText}>
+                Password must be at least 8 characters
+              </Text>
+            )}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 12,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text>Keep me logged in</Text>
+              {/* <Text
                 onPress={() => navigation.navigate(paths.forgotPassword)}
                 style={{ color: "#874CCC", fontWeight: "500" }}
               >
                 Forgot Password
               </Text> */}
-              </View>
-              <View style={{ marginTop: 60 }} />
-              <Pressable
-                onPress={handleAuthentication}
-                style={styles.buttonContainer}
-                disabled={loading}
-              >
-                <Text style={styles.buttonText}>{buttonText}</Text>
-              </Pressable>
-              <Pressable style={{ marginTop: 15 }}>
-                <Text
-                  onPress={() => navigation.navigate(paths.register)}
-                  style={styles.signupText}
-                >
-                  Don't have an account? Sign up
-                </Text>
-              </Pressable>
             </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    );
-  };
+            <View style={{ marginTop: 60 }} />
+            <Pressable
+              onPress={handleAuthentication}
+              style={styles.buttonContainer}
+              disabled={loading}
+            >
+              <Text style={styles.buttonText}>{buttonText}</Text>
+            </Pressable>
+            <Pressable style={{ marginTop: 15 }}>
+              <Text
+                onPress={() => navigation.navigate(paths.register)}
+                style={styles.signupText}
+              >
+                Don't have an account? Sign up
+              </Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
 };
 
 export default Login;

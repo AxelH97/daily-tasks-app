@@ -171,12 +171,21 @@ const Register = () => {
             </Text>
           )}
           <View style={{ marginTop: 60 }} />
+
           <Pressable
             onPress={handleRegistration}
             style={styles.buttonContainer}
             disabled={loading}
           >
             <Text style={styles.buttonText}>{buttonText}</Text>
+          </Pressable>
+          <Pressable style={{ marginTop: 15 }}>
+            <Text
+              onPress={() => navigation.navigate(paths.login)}
+              style={styles.signupText}
+            >
+              Already have an account? Log in
+            </Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>
