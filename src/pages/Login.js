@@ -70,9 +70,6 @@ const Login = () => {
       if (response.status === 200) {
         const { user, accesstoken, refreshToken } = response.data;
         const userId = user._id;
-        console.log("User ID:", userId);
-        console.log("Access Token:", accesstoken);
-        console.log("Refresh Token:", refreshToken);
         dispatchUser({
           type: "login_success",
           payload: {
