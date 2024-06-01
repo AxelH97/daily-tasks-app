@@ -1,43 +1,73 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { paths } from "../features/navigation/routing/paths";
 
 const Home = () => {
-  console.log("Home component rendered");
+  const navigation = useNavigation();
+
+  const handleNavigation = (path) => {
+    navigation.navigate(path);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.calendar)}
+      >
         <Image
           source={require("../image/Calendar.jpeg")}
           style={styles.image}
         />
         <Text style={styles.imageText}>Calendar</Text>
-      </View>
-      <View style={styles.imageContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.notiz)}
+      >
         <Image source={require("../image/Notiz.jpeg")} style={styles.image} />
         <Text style={styles.imageText}>Notiz</Text>
-      </View>
-      <View style={styles.imageContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.stopWatch)}
+      >
         <Image
           source={require("../image/Stopwatch.jpeg")}
           style={styles.image}
         />
         <Text style={styles.imageText}>Stopwatch</Text>
-      </View>
-      <View style={styles.imageContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.timer)}
+      >
         <Image source={require("../image/Timer.jpeg")} style={styles.image} />
         <Text style={styles.imageText}>Timer</Text>
-      </View>
-      <View style={styles.imageContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.todos)}
+      >
         <Image source={require("../image/Todo.jpeg")} style={styles.image} />
         <Text style={styles.imageText}>Todo</Text>
-      </View>
-      <View style={styles.imageContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => handleNavigation(paths.statistic)}
+      >
         <Image
           source={require("../image/Statistic.jpeg")}
           style={styles.image}
         />
         <Text style={styles.imageText}>Statistic</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -50,31 +80,29 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: "#5085ED",
     padding: 10,
-    flexWrap: "wrap", // Wrap content to next line if exceeds width
-    backgroundColor: "#5085ED",
+    flexWrap: "wrap",
   },
   imageContainer: {
-    width: "48%", // Adjust to make space between images
-    aspectRatio: 1, // Keep aspect ratio of container
-    position: "relative", // Ensure positioning context for absolute elements
+    width: "48%",
+    aspectRatio: 1,
+    position: "relative",
     marginBottom: 15,
     borderRadius: 10,
   },
   image: {
-    width: "100%", // Make image fill the container
-    height: "100%", // Make image fill the container
-    aspectRatio: 1, // Keep aspect ratio of image
+    width: "100%",
+    height: "100%",
+    aspectRatio: 1,
     opacity: 0.9,
     borderRadius: 10,
   },
   imageText: {
     position: "absolute",
     fontSize: 24,
-    top: "70%", // Place text in the middle vertically
-    left: "50%", // Place text in the middle horizontally
+    top: "70%",
+    left: "50%",
     transform: [{ translateX: -50 }, { translateY: -50 }],
     color: "white",
-    // backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 5,
     zIndex: 1,
   },
