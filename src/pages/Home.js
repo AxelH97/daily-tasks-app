@@ -25,7 +25,7 @@ const Home = () => {
 
       <TouchableOpacity
         style={styles.imageContainer}
-        onPress={() => handleNavigation(paths.notiz)}
+        onPress={() => handleNavigation(paths.notepad)}
       >
         <Image source={require("../image/Notiz.jpeg")} style={styles.image} />
         <Text style={styles.imageText}>Notiz</Text>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    backgroundColor: "#5085ED",
+    backgroundColor: "#2E7CE2",
     padding: 10,
     flexWrap: "wrap",
   },
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     aspectRatio: 1,
-    opacity: 0.9,
+    opacity: 0.8,
     borderRadius: 10,
   },
   imageText: {
