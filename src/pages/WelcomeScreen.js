@@ -8,12 +8,12 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../image/d-t-removebg-preview.png")} />
+      <Image source={require("../image/Dt_image.png")} style={styles.image} />
       <Text style={styles.subText}>Organize your day, achieve your goals.</Text>
       <View style={styles.buttonRow}>
         <TouchableOpacity onPress={() => navigation.navigate(paths.register)}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Register</Text>
+          <View style={styles.buttonContainerRegister}>
+            <Text style={styles.buttonTextRegister}>Register</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate(paths.login)}>
@@ -31,17 +31,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#1e90ff",
+    backgroundColor: "#2E7CE2",
+  },
+  image: {
+    width: "30%",
+    height: "30%",
+    resizeMode: "cover",
+    aspectRatio: 1,
+    opacity: 1.0,
+    borderRadius: 10,
   },
   welcomeText: {
     fontSize: 24,
     marginBottom: 20,
-    color: "white",
+    color: "#2E7CE2",
   },
   subText: {
     fontSize: 18,
     marginBottom: 20,
-    color: "gray",
+    color: "orange",
     textAlign: "center",
     paddingHorizontal: 20,
   },
@@ -50,15 +58,30 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonContainer: {
-    backgroundColor: "#9763B4",
+    backgroundColor: "white",
+    padding: 10,
+    margin: 5,
+    width: 120,
+    color: "#2E7CE2",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonContainerRegister: {
+    borderColor: "white",
+    borderWidth: 2,
     padding: 10,
     margin: 5,
     width: 120,
     flex: 1,
-    alignItems: "center", // Center text horizontally
-    justifyContent: "center", // Center text vertically
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
+    color: "#2E7CE2",
+    textAlign: "center",
+  },
+  buttonTextRegister: {
     color: "#FFFFFF",
     textAlign: "center",
   },
