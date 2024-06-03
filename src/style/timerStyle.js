@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#2E7CE2",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -10,6 +11,14 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     marginBottom: 20,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 5,
   },
   input: {
     width: 60,
