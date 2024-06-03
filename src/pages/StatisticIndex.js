@@ -101,27 +101,16 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     flex: 1,
-    backgroundColor: "#f0f4f7",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 15,
+    backgroundColor: "#2E7CE2",
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#1e3c72",
+    color: "white",
   },
   headerSubtitle: {
     fontSize: 14,
-    color: "#737373",
+    color: "white",
     marginTop: 4,
   },
   overviewContainer: {
@@ -130,7 +119,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#1e3c72",
+    color: "white",
     marginBottom: 12,
     textAlign: "center",
   },
@@ -147,21 +136,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   completedTaskBox: {
-    backgroundColor: "#4caf50",
+    backgroundColor: "#FFA500", // Orange
   },
   pendingTaskBox: {
-    backgroundColor: "#f44336",
+    backgroundColor: "#FFFFFF", // Weiß
   },
   taskCount: {
     textAlign: "center",
     fontSize: 22,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#1e3c72", // Dunkelblau
   },
   taskLabel: {
     marginTop: 8,
     fontSize: 16,
-    color: "#fff",
+    color: "#1e3c72", // Dunkelblau
   },
   chartContainer: {
     alignItems: "center",
@@ -171,7 +160,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   nextTasksContainer: {
-    backgroundColor: "#1e88e5",
+    backgroundColor: "#FF4500",
     padding: 15,
     borderRadius: 8,
     marginTop: 20,
