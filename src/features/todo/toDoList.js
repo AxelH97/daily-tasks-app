@@ -378,7 +378,7 @@ const ToDoList = () => {
               }}
             >
               <AntDesign name="pluscircle" size={30} color="black" />
-            </Text>
+            </TouchableOpacity>
           </View>
         </ModalContent>
       </BottomModal>
