@@ -163,7 +163,7 @@ const ToDoListWithBottomNavigation = () => {
         component={ToDoList}
         options={{
           tabBarLabel: "Todos",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <FontAwesome5 name="tasks" size={24} color="#7CB9E8" />
@@ -177,7 +177,7 @@ const ToDoListWithBottomNavigation = () => {
         component={CalendarComponent}
         options={{
           tabBarLabel: "Calendar",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <AntDesign name="calendar" size={24} color="#7CB9E8" />
@@ -191,7 +191,7 @@ const ToDoListWithBottomNavigation = () => {
         component={Notepad}
         options={{
           tabBarLabel: "Notepad",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <SimpleLineIcons name="notebook" size={24} color="#7CB9E8" />
@@ -205,7 +205,7 @@ const ToDoListWithBottomNavigation = () => {
         component={StopWatch}
         options={{
           tabBarLabel: "Stopwatch",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Entypo name="stopwatch" size={24} color="#7CB9E8" />
@@ -219,7 +219,7 @@ const ToDoListWithBottomNavigation = () => {
         component={Timer}
         options={{
           tabBarLabel: "Timer",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Ionicons name="timer" size={24} color="#7CB9E8" />
@@ -233,7 +233,7 @@ const ToDoListWithBottomNavigation = () => {
         component={StatisticIndex}
         options={{
           tabBarLabel: "Statistic",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "black" },
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
