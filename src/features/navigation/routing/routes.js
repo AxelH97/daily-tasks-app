@@ -7,7 +7,6 @@ import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
 import ProfilePage from "../../../pages/ProfilePage";
-import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
 import Timer from "../../../components/timer";
