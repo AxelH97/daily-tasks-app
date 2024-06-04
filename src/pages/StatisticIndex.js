@@ -62,7 +62,7 @@ const TaskOverview = () => {
               },
             ],
           }}
-          width={Dimensions.get("window").width - 40} // Adjusted for padding
+          width={Dimensions.get("window").width - 40}
           height={220}
           yAxisInterval={2}
           chartConfig={{
@@ -99,7 +99,7 @@ const TaskOverview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 5,
     flex: 1,
     backgroundColor: "#2E7CE2",
   },
@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   overviewContainer: {
-    marginVertical: 20,
+    marginVertical: 10,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
-    marginBottom: 12,
+    marginBottom: 5,
     textAlign: "center",
   },
   taskSummary: {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   taskBox: {
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     flex: 1,
     justifyContent: "center",
@@ -136,32 +136,32 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   completedTaskBox: {
-    backgroundColor: "#FFA500", // Orange
+    backgroundColor: "#FFA500",
   },
   pendingTaskBox: {
-    backgroundColor: "#FFFFFF", // Weiß
+    backgroundColor: "#FFFFFF",
   },
   taskCount: {
     textAlign: "center",
     fontSize: 22,
     fontWeight: "bold",
-    color: "#1e3c72", // Dunkelblau
+    color: "#1e3c72",
   },
   taskLabel: {
-    marginTop: 8,
+    marginTop: 4,
     fontSize: 16,
-    color: "#1e3c72", // Dunkelblau
+    color: "#1e3c72",
   },
   chartContainer: {
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: 10,
   },
   chart: {
     borderRadius: 16,
   },
   nextTasksContainer: {
     backgroundColor: "#FF4500",
-    padding: 15,
+    padding: 10,
     borderRadius: 8,
     marginTop: 20,
   },
