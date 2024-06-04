@@ -17,6 +17,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerContent = () => {
   const { user, dispatchUser } = useUsersContext();
+  const userId = user._id;
   const navigation = useNavigation();
 
   const handleLogout = async () => {
@@ -44,7 +45,7 @@ const DrawerContent = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${user.user.id}`, {
+      const response = await axios.delete(`${API_URL}/users/${userId}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -62,7 +63,7 @@ const DrawerContent = () => {
   };
 
   return (
-    <View>
+    <View style={{ marginTop: 40 }}>
       <TouchableOpacity
         onPress={handleLogout}
         style={{ flexDirection: "row", alignItems: "center" }}

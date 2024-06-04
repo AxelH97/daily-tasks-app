@@ -7,6 +7,7 @@ const paths = {
   profile: "profile",
   home: "home",
   todos: "todos",
+  statistic: "statistic",
   calendar: "calendar",
   timer: "timer",
   stopWatch: "stopwatch",

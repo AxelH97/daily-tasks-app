@@ -1,4 +1,4 @@
-import  React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { StyleSheet, SafeAreaView, Text, View, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Constants from "expo-constants";
@@ -39,7 +39,7 @@ export default function StopWatch() {
 
   return (
     <SafeAreaView style={styles.container}>
-        <MyHeader/>
+      <MyHeader />
       <StatusBar style="light" />
 
       <View style={styles.display}>

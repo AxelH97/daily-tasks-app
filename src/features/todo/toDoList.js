@@ -8,6 +8,7 @@ import {
   FlatList,
   ScrollView,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import taskService from "../../services/taskServices";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -114,11 +115,12 @@ const ToDoList = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          backgroundColor: "#2E7CE2",
         }}
       >
         <Pressable
           style={{
-            backgroundColor: "#7CB9E8",
+            // backgroundColor: "#7CB9E8",
             paddingHorizontal: 10,
             paddingVertical: 6,
             borderRadius: 20,
@@ -130,7 +132,7 @@ const ToDoList = () => {
         </Pressable>
         <Pressable
           style={{
-            backgroundColor: "#7CB9E8",
+            // backgroundColor: "#7CB9E8",
             paddingHorizontal: 10,
             paddingVertical: 6,
             borderRadius: 20,
@@ -142,7 +144,7 @@ const ToDoList = () => {
         </Pressable>
         <Pressable
           style={{
-            backgroundColor: "#7CB9E8",
+            // backgroundColor: "#7CB9E8",
             paddingHorizontal: 10,
             paddingVertical: 6,
             borderRadius: 20,
@@ -161,16 +163,27 @@ const ToDoList = () => {
             marginLeft: "auto",
           }}
         >
-          <Text style={{ fontSize: 24, color: "#007FFF", fontWeight: "bold" }}>
+          {/* <Text style={{ fontSize: 24, color: "#007FFF", fontWeight: "bold" }}>
             Add
-          </Text>
+          </Text> */}
+          <AntDesign name="pluscircle" size={30} color="white" />
         </Pressable>
       </View>
-      <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView style={{ flex: 1, backgroundColor: "#2E7CE2" }}>
         <View style={{ padding: 10 }}>
           {todos?.length > 0 ? (
             <View>
-              {pendingTodos?.length > 0 && <Text>Tasks to Do! {today}</Text>}
+              {pendingTodos?.length > 0 && (
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 24,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Tasks to Do! {today}
+                </Text>
+              )}
               {pendingTodos?.map((item, index) => (
                 <Pressable
                   onPress={() => {
@@ -187,6 +200,7 @@ const ToDoList = () => {
                     padding: 10,
                     borderRadius: 7,
                     marginVertical: 10,
+                    fontSize: 16,
                   }}
                   key={index}
                 >
@@ -290,15 +304,14 @@ const ToDoList = () => {
               }}
             >
               <Image
-                style={{ width: 100, height: 100, resizeMode: "contain" }}
-                source={{
-                  uri: "https://cdn-icons-png.flaticon.com/128/2387/2387679.png",
-                }}
+                style={{ width: 300, height: 300, resizeMode: "contain" }}
+                source={require("../../image/note-5913650_1280.png")}
               />
               <Text
                 style={{
                   fontSize: 16,
                   marginTop: 15,
+                  color: "#F7F7F7",
                   fontWeight: "600",
                   textAlign: "center",
                 }}
@@ -309,7 +322,7 @@ const ToDoList = () => {
                 onPress={() => setModalVisible(!isModalVisible)}
                 style={{ marginTop: 15 }}
               >
-                <AntDesign name="pluscircle" size={30} color="#007FFF" />
+                <AntDesign name="pluscircle" size={30} color="white" />
               </Pressable>
             </View>
           )}
@@ -329,13 +342,20 @@ const ToDoList = () => {
         visible={isModalVisible}
         onTouchOutside={() => setModalVisible(!isModalVisible)}
       >
-        <ModalContent style={{ width: "100%", height: 280 }}>
+        <ModalContent
+          style={{
+            width: "100%",
+            height: 220,
+            backgroundColor: "#F2F2F2",
+            borderRadius: 20,
+          }}
+        >
           <View
             style={{
               marginVertical: 10,
               flexDirection: "row",
               alignItems: "center",
-              gap: 10,
+              justifyContent: "space-between",
             }}
           >
             <TextInput
@@ -343,90 +363,105 @@ const ToDoList = () => {
               onChangeText={(text) => setTodo(text)}
               placeholder="Input a new task here"
               style={{
-                padding: 10,
-                borderColor: "#E0E0E0",
+                padding: 12,
+                borderColor: "#D3D3D3",
                 borderWidth: 1,
-                borderRadius: 5,
+                borderRadius: 10,
                 flex: 1,
               }}
             />
-            <Text
+            <TouchableOpacity
               onPress={addTodo}
-              style={{ fontSize: 12, color: "#007FFF", fontWeight: "bold" }}
+              style={{
+                backgroundColor: "#007AFF",
+                padding: 12,
+                borderRadius: 10,
+              }}
             >
-              Add
-            </Text>
+              <Text
+                style={{ fontSize: 14, color: "white", fontWeight: "bold" }}
+              >
+                Add
+              </Text>
+            </TouchableOpacity>
           </View>
-          <Text>Choose Category</Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "#333",
+              marginBottom: 5,
+            }}
+          >
+            Choose Category
+          </Text>
 
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              gap: 10,
+              justifyContent: "space-between",
               marginVertical: 10,
             }}
           >
-            <Pressable
+            <TouchableOpacity
               onPress={() => setCategory("Work")}
               style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
+                backgroundColor: "#4CAF50",
+                paddingHorizontal: 18,
+                paddingVertical: 10,
+                borderRadius: 15,
               }}
             >
-              <Text>Work</Text>
-            </Pressable>
-            <Pressable
+              <Text style={{ color: "white", fontSize: 14 }}>Work</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => setCategory("Personal")}
               style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
+                backgroundColor: "#FF9800",
+                paddingHorizontal: 18,
+                paddingVertical: 10,
+                borderRadius: 15,
               }}
             >
-              <Text>Personal</Text>
-            </Pressable>
-            <Pressable
+              <Text style={{ color: "white", fontSize: 14 }}>Personal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => setCategory("WishList")}
               style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
+                backgroundColor: "#E91E63",
+                paddingHorizontal: 18,
+                paddingVertical: 10,
+                borderRadius: 15,
               }}
             >
-              <Text>WishList</Text>
-            </Pressable>
+              <Text style={{ color: "white", fontSize: 14 }}>WishList</Text>
+            </TouchableOpacity>
           </View>
-          <Text>Some sugggestions</Text>
+
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              gap: 10,
+              justifyContent: "space-between",
               flexWrap: "wrap",
               marginVertical: 10,
             }}
           >
             {suggestions?.map((item, index) => (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => setTodo(item?.todo)}
                 style={{
-                  backgroundColor: "#F0F8FF",
-                  paddingHorizontal: 10,
-                  paddingVertical: 4,
-                  borderRadius: 25,
+                  backgroundColor: "#D3D3D3",
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  borderRadius: 15,
+                  marginVertical: 5,
                 }}
                 key={index}
               >
-                <Text style={{ textAlign: "center" }}>{item?.todo}</Text>
-              </Pressable>
+                <Text style={{ fontSize: 14 }}>{item?.todo}</Text>
+              </TouchableOpacity>
             ))}
           </View>
         </ModalContent>
@@ -436,104 +471,106 @@ const ToDoList = () => {
 };
 export default ToDoList;
 
-// export const ToDoListWithBottomNavigation = () => {
-//   return (
-//     <Tab.Navigator>
-//       <Tab.Screen
-//         name="TodoList"
-//         component={ToDoList}
-//         options={{
-//           tabBarLabel: "Todos",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <AntDesign name="calendar" size={24} color="#7CB9E8" />
-//             ) : (
-//               <AntDesign name="calendar" size={24} color="black" />
-//             ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="calendar"
-//         component={Calendar}
-//         options={{
-//           tabBarLabel: "Calendar",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <AntDesign name="calendar" size={24} color="#7CB9E8" />
-//             ) : (
-//               <AntDesign name="calendar" size={24} color="black" />
-//             ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="StopWatch"
-//         component={StopWatch}
-//         options={{
-//           tabBarLabel: "Stopwatch",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <Entypo name="stopwatch" size={24} color="#7CB9E8" />
-//             ) : (
-//               <Entypo name="stopwatch" size={24} color="black" />
-//             ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="Timer"
-//         component={Timer}
-//         options={{
-//           tabBarLabel: "timer",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <Ionicons name="timer" size={24} color="#7CB9E8" />
-//             ) : (
-//               <Ionicons name="timer" size={24} color="black" />
-//             ),
-//         }}
-//       />
+export const ToDoListWithBottomNavigation = () => {
+  return (
+    <View style={{ flex: 2 }}>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="TodoList"
+          component={ToDoList}
+          options={{
+            tabBarLabel: "Todos",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <AntDesign name="calendar" size={24} color="#7CB9E8" />
+              ) : (
+                <AntDesign name="calendar" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="calendar"
+          component={Calendar}
+          options={{
+            tabBarLabel: "Calendar",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <AntDesign name="calendar" size={24} color="#7CB9E8" />
+              ) : (
+                <AntDesign name="calendar" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="StopWatch"
+          component={StopWatch}
+          options={{
+            tabBarLabel: "Stopwatch",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Entypo name="stopwatch" size={24} color="#7CB9E8" />
+              ) : (
+                <Entypo name="stopwatch" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Timer"
+          component={Timer}
+          options={{
+            tabBarLabel: "timer",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Ionicons name="timer" size={24} color="#7CB9E8" />
+              ) : (
+                <Ionicons name="timer" size={24} color="black" />
+              ),
+          }}
+        />
 
-//       <Tab.Screen
-//         name="profile"
-//         component={ProfilePage}
-//         options={{
-//           tabBarLabel: "Profile",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           headerShown: false,
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <MaterialCommunityIcons
-//                 name="account-details"
-//                 size={24}
-//                 color="#7CB9E8"
-//               />
-//             ) : (
-//               <MaterialCommunityIcons
-//                 name="account-details"
-//                 size={24}
-//                 color="black"
-//               />
-//             ),
-//         }}
-//       />
-//       <Tab.Screen
-//         name="Home"
-//         component={Home}
-//         options={{
-//           tabBarLabel: "Home",
-//           tabBarLabelStyle: { color: "#7CB9E8" },
-//           headerShown: false,
-//           tabBarIcon: ({ focused }) =>
-//             focused ? (
-//               <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
-//             ) : (
-//               <MaterialCommunityIcons name="home" size={24} color="black" />
-//             ),
-//         }}
-//       />
-//     </Tab.Navigator>
-//   );
-// };
+        <Tab.Screen
+          name="profile"
+          component={ProfilePage}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <MaterialCommunityIcons
+                  name="account-details"
+                  size={24}
+                  color="#7CB9E8"
+                />
+              ) : (
+                <MaterialCommunityIcons
+                  name="account-details"
+                  size={24}
+                  color="black"
+                />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarLabel: "Home",
+            tabBarLabelStyle: { color: "#7CB9E8" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
+              ) : (
+                <MaterialCommunityIcons name="home" size={24} color="black" />
+              ),
+          }}
+        />
+      </Tab.Navigator>
+    </View>
+  );
+};
