@@ -194,7 +194,7 @@ const ToDoList = () => {
             marginLeft: "auto",
           }}
         >
-          <Text style={{ fontSize: 24, color: "#007FFF", fontWeight: "bold" }}>
+          <Text style={{ fontSize: 24, color: "#black", fontWeight: "bold" }}>
             <AntDesign name="pluscircle" size={30} color="black" />
           </Text>
         </Pressable>
@@ -352,7 +352,7 @@ const ToDoList = () => {
                 fontWeight: "bold",
               }}
             >
-              <AntDesign name="pluscircle" size={30} color="white" />
+              <AntDesign name="pluscircle" size={30} color="black" />
             </Text>
           </View>
         </ModalContent>
@@ -399,7 +399,7 @@ const ToDoList = () => {
               onPress={editTodo}
               style={{
                 fontSize: 12,
-                color: "#007FFF",
+                color: "black",
                 fontWeight: "bold",
               }}
             >
