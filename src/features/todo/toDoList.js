@@ -19,7 +19,8 @@ import { BottomModal } from "react-native-modals";
 import { ModalTitle, ModalContent } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import TaskItem from "../../components/taskItem"; // Eine separate Datei für TaskItem
+import TaskItem from "../../components/taskItem";
+import { Entypo } from "@expo/vector-icons";
 
 const ToDoList = () => {
   const { tasks, dispatchTasks } = useTaskContext();
@@ -68,8 +69,12 @@ const ToDoList = () => {
         title: currentTodo.title,
         category: currentTodo.category,
       };
+      dispatchTasks({
+        type: "EDIT_TASK",
+        payload: { index: currentTodo._id, editedTask: todoData },
+      });
       axios
-        .patch(`${API_URL}/todos/${currentTodo._id}`, todoData)
+        .put(`${API_URL}/todos/${currentTodo._id}`, todoData)
         .then((response) => {
           console.log(response);
         })
@@ -78,7 +83,6 @@ const ToDoList = () => {
         });
       await getUserTodos(userId);
       setEditModalVisible(false);
-      setCurrentTodo(null);
     } catch (error) {
       console.error("error", error);
     }
@@ -191,7 +195,7 @@ const ToDoList = () => {
           }}
         >
           <Text style={{ fontSize: 24, color: "#007FFF", fontWeight: "bold" }}>
-            Add
+            <AntDesign name="pluscircle" size={30} color="black" />
           </Text>
         </Pressable>
       </View>
@@ -232,7 +236,9 @@ const ToDoList = () => {
                       marginVertical: 10,
                     }}
                   >
-                    <Text>Completed Tasks</Text>
+                    <Text>
+                      <Entypo name="star-outlined" size={24} color="black" />
+                    </Text>
                     <MaterialIcons
                       name="arrow-drop-down"
                       size={24}
@@ -265,7 +271,9 @@ const ToDoList = () => {
                             borderRadius: 5,
                           }}
                         >
-                          <Text style={{ color: "white" }}>Delete</Text>
+                          <Text style={{ color: "white" }}>
+                            <AntDesign name="delete" size={24} color="black" />
+                          </Text>
                         </Pressable>
                         <Text
                           style={{
@@ -344,7 +352,7 @@ const ToDoList = () => {
                 fontWeight: "bold",
               }}
             >
-              Add
+              <AntDesign name="pluscircle" size={30} color="white" />
             </Text>
           </View>
         </ModalContent>
