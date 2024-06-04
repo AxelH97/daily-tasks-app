@@ -98,7 +98,7 @@ const DrawerContent = () => {
           <Text style={styles.username}>{userData.username}</Text>
         </View>
       )}
-   
+      {user.isLoggedIn && (
         <>
           <TouchableOpacity
             onPress={handleLogout}
@@ -111,7 +111,7 @@ const DrawerContent = () => {
             <Text style={{ padding: 10, fontSize: 16 }}>Delete Account</Text>
           </TouchableOpacity>
         </>
- 
+      )}
     </View>
   );
 };
@@ -119,80 +119,45 @@ const DrawerContent = () => {
 export default function Routes() {
   const routes = useRoutes();
   const { user } = useUsersContext();
+
   return (
     <NavigationContainer>
-      {/* {user.isLoggedIn ? ( */}
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen
-          name="Daily - Tasks"
-          options={{
-            drawerIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="account-details"
-                size={size}
-                color={color}
-              />
-            ),
-          }}
-        >
-          {() => (
-            <Stack.Navigator>
-              {routes.map((route) => (
-                <Stack.Screen
-                  key={route.path}
-                  name={route.path}
-                  component={route.component}
-                  options={({ navigation }) => {
-                    console.log("Route options for:", route.path);
-                    console.log("route:", route);
-                    console.log("user.isLoggedIn:", user.isLoggedIn);
-                    if (
-                      route.isProtected &&
-                      !user.isLoggedIn &&
-                      user.email !== ""
-                    ) {
-                      // Navigate to the redirectTo path if user is not logged in
-                      navigation.navigate(route.redirectTo);
-                    }
-                    return {
+      {user.isLoggedIn ? (
+        <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+          <Drawer.Screen name="Menu">
+            {() => (
+              <Stack.Navigator>
+                {routes.map((route) => (
+                  <Stack.Screen
+                    key={route.path}
+                    name={route.path}
+                    component={route.component}
+                    options={{
                       headerShown: false,
-                    };
-                  }}
-                />
-              ))}
-            </Stack.Navigator>
-          )}
-        </Drawer.Screen>
-      </Drawer.Navigator>
-      {/* ) : (
+                    }}
+                  />
+                ))}
+              </Stack.Navigator>
+            )}
+          </Drawer.Screen>
+        </Drawer.Navigator>
+      ) : (
         <Stack.Navigator>
           {routes.map((route) => (
             <Stack.Screen
               key={route.path}
               name={route.path}
               component={route.component}
-              options={({ navigation }) => {
-                console.log("Route options for:", route.path);
-                console.log("route:", route);
-                console.log("user.isLoggedIn:", user.isLoggedIn);
-                if (
-                  route.isProtected &&
-                  !user.isLoggedIn &&
-                  user.email !== ""
-                ) {
-                  // Navigate to the redirectTo path if user is not logged in
-                  navigation.navigate(route.redirectTo);
-                }
-                return {
-                  headerShown: false,
-                };
+              options={{
+                headerShown: false,
               }}
             />
           ))}
         </Stack.Navigator>
-      )} */}
+      )}
       <ModalPortal />
-    </NavigationContainer>)
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
