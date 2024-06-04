@@ -22,6 +22,7 @@ import { SlideAnimation } from "react-native-modals";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import TaskItem from "../../components/taskItem";
 import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ToDoList = () => {
   const { tasks, dispatchTasks } = useTaskContext();
@@ -277,7 +278,6 @@ const ToDoList = () => {
                         <Pressable
                           onPress={() => deleteTodo(item._id)}
                           style={{
-                            backgroundColor: "#FF6347",
                             paddingHorizontal: 10,
                             paddingVertical: 4,
                             borderRadius: 5,
@@ -377,7 +377,7 @@ const ToDoList = () => {
                 fontWeight: "bold",
               }}
             >
-              <AntDesign name="pluscircle" size={30} color="black" />
+              <MaterialCommunityIcons name="send" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </ModalContent>

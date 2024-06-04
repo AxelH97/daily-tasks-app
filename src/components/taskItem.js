@@ -19,7 +19,6 @@ const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
         <Pressable
           onPress={() => onMarkCompleted(item?._id)}
           style={{
-            backgroundColor: "#007FFF",
             paddingHorizontal: 10,
             paddingVertical: 4,
             borderRadius: 5,
