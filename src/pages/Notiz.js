@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Notiz = ({ title, content }) => {
+const Notiz = ({ title, content, date }) => {
   return (
     <View style={styles.notizContainer}>
       <Text style={styles.notizTitle}>{title}</Text>
       <Text style={styles.notizContent}>{content}</Text>
+      <Text style={styles.notizDate}>{date}</Text>
     </View>
   );
 };
