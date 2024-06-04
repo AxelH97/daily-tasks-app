@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2E7CE2",
+    padding: 5,
   },
   image: {
     width: "30%",
@@ -56,6 +57,8 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    padding: 5,
+    height: 70,
   },
   buttonContainer: {
     backgroundColor: "white",
