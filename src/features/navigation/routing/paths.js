@@ -1,5 +1,5 @@
 const paths = {
-  welcomescreen: "welcome",
+  welcomescreen: "WelcomeScreen",
   register: "register",
   login: "login",
   forgotPassword: "forgotPassword",

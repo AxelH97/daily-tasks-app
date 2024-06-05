@@ -13,19 +13,20 @@ import { useUsersContext } from "../context/UserContext";
 import { API_URL } from "../data/api";
 
 const Notepad = () => {
+  const { user } = useUsersContext();
+  const userId = user._id;
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [notizen, setNotizen] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const { user } = useUsersContext();
-  const userId = user._id;
 
-  const fetchRecentNotes = async () => {
+  const fetchNotesByUserId = async () => {
     try {
-      const response = await axios.get(`${API_URL}/notes/${userId}/recent`);
+      const response = await axios.get(`${API_URL}/notes/${userId}`);
       setNotizen(response.data);
     } catch (error) {
-      console.error("Error fetching recent notes:", error);
+      console.error("Error fetching notes:", error);
     }
   };
 
@@ -33,7 +34,7 @@ const Notepad = () => {
     const dateObj = new Date();
     const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()}`;
     setCurrentDate(formattedDate);
-    fetchRecentNotes();
+    fetchNotesByUserId();
   }, []);
 
   const addNotiz = async () => {
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 5,
     paddingBottom: 3,
     marginTop: 20,
     borderBottomWidth: 2,
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2E7CE2",
     borderRadius: 6,
     padding: 10,
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: "auto",
     marginRight: "auto",
     textAlign: "center",
