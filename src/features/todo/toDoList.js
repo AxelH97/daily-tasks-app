@@ -248,9 +248,7 @@ const ToDoList = () => {
                       marginVertical: 10,
                     }}
                   >
-                    <Text>
-                      <Entypo name="star-outlined" size={24} color="white" />
-                    </Text>
+                    <Text>Completed Tasks</Text>
                     <MaterialIcons
                       name="arrow-drop-down"
                       size={24}

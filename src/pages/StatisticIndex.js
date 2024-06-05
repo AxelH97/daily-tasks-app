@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LineChart } from "react-native-chart-kit";
 import { API_URL } from "../data/api";
+<<<<<<< HEAD
 import { useUsersContext } from "../context/UserContext";
 
 const TaskOverview = () => {
@@ -11,6 +12,11 @@ const TaskOverview = () => {
   const { user } = useUsersContext();
   const userId = user._id;
 
+=======
+const TaskOverview = () => {
+  const [completedTasks, setCompletedTasks] = useState(0);
+  const [pendingTasks, setPendingTasks] = useState(0);
+>>>>>>> 8de63c9e8fed5d34dfd6a517eb2172c08fc105bf
   const fetchTaskData = async () => {
     try {
       const response = await axios.get(`${API_URL}/todos/count`);
@@ -24,10 +30,8 @@ const TaskOverview = () => {
   useEffect(() => {
     fetchTaskData();
   }, []);
-
   console.log("Completed Tasks:", completedTasks);
   console.log("Pending Tasks:", pendingTasks);
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -38,7 +42,6 @@ const TaskOverview = () => {
           <Text style={styles.headerSubtitle}>Select Categories</Text>
         </View>
       </View>
-
       <View style={styles.overviewContainer}>
         <Text style={styles.sectionTitle}>Task Summary</Text>
         <View style={styles.taskSummary}>
@@ -46,14 +49,12 @@ const TaskOverview = () => {
             <Text style={styles.taskCount}>{completedTasks}</Text>
             <Text style={styles.taskLabel}>Completed Tasks</Text>
           </View>
-
           <View style={[styles.taskBox, styles.pendingTaskBox]}>
             <Text style={styles.taskCount}>{pendingTasks}</Text>
             <Text style={styles.taskLabel}>Pending Tasks</Text>
           </View>
         </View>
       </View>
-
       <View style={styles.chartContainer}>
         <LineChart
           data={{
@@ -68,9 +69,9 @@ const TaskOverview = () => {
           height={220}
           yAxisInterval={2}
           chartConfig={{
-            backgroundColor: "#1e3c72",
-            backgroundGradientFrom: "#2a5298",
-            backgroundGradientTo: "#6dd5ed",
+            backgroundColor: "#1E3C72",
+            backgroundGradientFrom: "#2A5298",
+            backgroundGradientTo: "#6DD5ED",
             decimalPlaces: 2,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -80,25 +81,22 @@ const TaskOverview = () => {
             propsForDots: {
               r: "6",
               strokeWidth: "2",
-              stroke: "#6dd5ed",
+              stroke: "#6DD5ED",
             },
           }}
           bezier
           style={styles.chart}
         />
       </View>
-
       <View style={styles.nextTasksContainer}>
         <Text style={styles.nextTasksText}>Tasks for the Next Seven Days</Text>
       </View>
-
       <View style={styles.footerImageContainer}>
         <Image source={require("../image/iconTodo.png")} />
       </View>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     // marginTop: 30,
@@ -148,12 +146,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#1e3c72",
+    color: "#1E3C72",
   },
   taskLabel: {
     marginTop: 2,
     fontSize: 14,
-    color: "#1e3c72",
+    color: "#1E3C72",
   },
   chartContainer: {
     alignItems: "center",
@@ -185,5 +183,4 @@ const styles = StyleSheet.create({
     height: 80,
   },
 });
-
 export default TaskOverview;

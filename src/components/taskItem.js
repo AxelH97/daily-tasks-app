@@ -1,7 +1,7 @@
 // src/components/TaskItem.js
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
   return (
@@ -24,7 +24,7 @@ const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
             borderRadius: 5,
           }}
         >
-          <Entypo name="star-outlined" size={24} color="black" />
+          <Ionicons name="checkmark-done-sharp" size={24} color="black" />
         </Pressable>
       </View>
     </Pressable>
