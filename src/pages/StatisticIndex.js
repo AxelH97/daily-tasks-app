@@ -3,10 +3,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LineChart } from "react-native-chart-kit";
 import { API_URL } from "../data/api";
+import { useUsersContext } from "../context/UserContext";
 
 const TaskOverview = () => {
   const [completedTasks, setCompletedTasks] = useState(0);
   const [pendingTasks, setPendingTasks] = useState(0);
+  const { user } = useUsersContext();
+  const userId = user._id;
 
   const fetchTaskData = async () => {
     try {
@@ -18,7 +21,6 @@ const TaskOverview = () => {
       console.log("error", error);
     }
   };
-
   useEffect(() => {
     fetchTaskData();
   }, []);
