@@ -99,28 +99,29 @@ const TaskOverview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    // marginTop: 30,
+    padding: 3,
     flex: 1,
     backgroundColor: "#2E7CE2",
   },
   headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
+    fontSize: 16,
+    fontWeight: "600",
     color: "white",
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: "white",
-    marginTop: 4,
+    marginTop: 2,
   },
   overviewContainer: {
-    marginVertical: 10,
+    marginVertical: 8,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: "white",
-    marginBottom: 5,
+    marginBottom: 4,
     textAlign: "center",
   },
   taskSummary: {
@@ -128,12 +129,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   taskBox: {
-    padding: 10,
-    borderRadius: 10,
+    padding: 8,
+    borderRadius: 8,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 5,
+    marginHorizontal: 3,
   },
   completedTaskBox: {
     backgroundColor: "#FFA500",
@@ -143,43 +144,43 @@ const styles = StyleSheet.create({
   },
   taskCount: {
     textAlign: "center",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#1e3c72",
   },
   taskLabel: {
-    marginTop: 4,
-    fontSize: 16,
+    marginTop: 2,
+    fontSize: 14,
     color: "#1e3c72",
   },
   chartContainer: {
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 8,
   },
   chart: {
     borderRadius: 16,
   },
   nextTasksContainer: {
     backgroundColor: "#FF4500",
-    padding: 10,
+    padding: 8,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 16,
   },
   nextTasksText: {
     textAlign: "center",
     color: "white",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
   },
   footerImageContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 20,
     color: "black",
   },
   footerImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
   },
 });
 
