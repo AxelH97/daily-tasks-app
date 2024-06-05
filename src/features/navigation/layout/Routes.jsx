@@ -6,10 +6,18 @@ import useRoutes from "../../../features/navigation/routing/routes.js";
 import { useUsersContext } from "../../../context/UserContext.jsx";
 import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "../../../data/api";
-import { View, TouchableOpacity, Text, Alert, Image, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+  Image,
+  StyleSheet,
+} from "react-native";
 import axios from "axios";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ModalPortal } from "react-native-modals";
+import { paths } from "../../navigation/routing/paths.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -43,13 +51,18 @@ const DrawerContent = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`${API_URL}/users/logout`, {}, {
-        headers: { "Content-Type": "application/json" },
-      });
-
+      const response = await axios.post(
+        `${API_URL}/users/logout`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.status === 200) {
         dispatchUser({ type: "logout" });
-        navigation.navigate("WelcomeScreen");
+        navigation.navigate(paths.welcomescreen);
       } else {
         Alert.alert("Logout Failed", response.data.message);
       }
@@ -80,7 +93,10 @@ const DrawerContent = () => {
       {userData && (
         <View style={styles.profileContainer}>
           {userData.avatarImg?.url ? (
-            <Image source={{ uri: userData.avatarImg.url }} style={styles.avatar} />
+            <Image
+              source={{ uri: userData.avatarImg.url }}
+              style={styles.avatar}
+            />
           ) : (
             <Text>No profile image available</Text>
           )}
@@ -145,7 +161,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   profileContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 20,
   },
   avatar: {
@@ -157,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   button: {
     flexDirection: "row",
@@ -167,5 +183,5 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     marginRight: 10,
-  }
+  },
 });
