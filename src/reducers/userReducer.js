@@ -13,11 +13,6 @@ const userReducer = (state, action) => {
         _id: action.payload.user._id,
         isLoggedIn: true,
       };
-
-    // case "logout":
-    //   return {
-    //     ...initialState,
-    //   };
     case "reset_password":
       return {
         ...state,
