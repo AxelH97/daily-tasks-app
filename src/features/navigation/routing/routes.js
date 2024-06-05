@@ -7,12 +7,13 @@ import ToDoList from "../../todo/toDoList";
 import ResetPassword from "../../../pages/ResetPassword";
 import { useUsersContext } from "../../../context/UserContext";
 import ProfilePage from "../../../pages/ProfilePage";
-import Calendar from "../../../components/Calendar";
 import StopWatch from "../../../components/StopWatch";
 import Home from "../../../pages/Home";
 import Timer from "../../../components/timer";
 import CalendarComponent from "../../../components/Calendar";
 import ImageUploader from "../../../pages/UploaderImage";
+import StatisticIndex from "../../../pages/StatisticIndex";
+import Notepad from "../../../pages/Notepad";
 const useRoutes = () => {
   const { user } = useUsersContext();
   const routes = [
@@ -45,6 +46,18 @@ const useRoutes = () => {
     {
       path: paths.todos,
       component: ToDoList,
+      isProtected: true,
+      redirectTo: paths.login,
+    },
+    {
+      path: paths.notepad,
+      component: Notepad,
+      isProtected: true,
+      redirectTo: paths.login,
+    },
+    {
+      path: paths.statistic,
+      component: StatisticIndex,
       isProtected: true,
       redirectTo: paths.login,
     },

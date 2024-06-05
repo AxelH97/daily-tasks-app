@@ -14,6 +14,8 @@ const taskReducer = (state, action) => {
           ? { ...task, title: action.payload.editedTask }
           : task
       );
+    case "SET_DATE":
+      return { ...state, date: action.payload };
     default:
       return state;
   }

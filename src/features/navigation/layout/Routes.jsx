@@ -16,6 +16,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerContent = () => {
   const { user, dispatchUser } = useUsersContext();
+  const userId = user._id;
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
 
@@ -66,7 +67,7 @@ const DrawerContent = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${user._id}`, {
+      const response = await axios.delete(`${API_URL}/users/${user.user.id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -84,34 +85,17 @@ const DrawerContent = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {userData && (
-        <View style={styles.profileContainer}>
-          {userData.avatarImg?.url ? (
-            <Image
-              source={{ uri: userData.avatarImg.url }}
-              style={styles.avatar}
-            />
-          ) : (
-            <Text>No profile image available</Text>
-          )}
-          <Text style={styles.username}>{userData.username}</Text>
-        </View>
-      )}
-      {user.isLoggedIn && (
-        <>
-          <TouchableOpacity
-            onPress={handleLogout}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <Text style={{ padding: 10, fontSize: 16 }}>Logout</Text>
-            <MaterialIcons name="logout" size={16} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleDeleteAccount}>
-            <Text style={{ padding: 10, fontSize: 16 }}>Delete Account</Text>
-          </TouchableOpacity>
-        </>
-      )}
+    <View>
+      <TouchableOpacity
+        onPress={handleLogout}
+        style={{ flexDirection: "row", alignItems: "center" }}
+      >
+        <Text style={{ padding: 10, fontSize: 16 }}>Logout</Text>
+        <MaterialIcons name="logout" size={16} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleDeleteAccount}>
+        <Text style={{ padding: 10, fontSize: 16 }}>Delete Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };
