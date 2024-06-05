@@ -17,7 +17,7 @@ import { useTaskContext } from "../../context/TasksContext";
 import { useUsersContext } from "../../context/UserContext";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { BottomModal } from "react-native-modals";
-import { ModalTitle, ModalContent } from "react-native-modals";
+import { ModalContent } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import TaskItem from "../../components/taskItem";
@@ -144,6 +144,7 @@ const ToDoList = () => {
     <>
       <View
         style={{
+          // marginTop: 25,
           marginHorizontal: 5,
           marginVertical: 5,
           flexDirection: "row",
@@ -198,7 +199,7 @@ const ToDoList = () => {
           }}
         >
           <Text style={{ fontSize: 24, color: "#black", fontWeight: "bold" }}>
-            <AntDesign name="pluscircle" size={30} color="black" />
+            <AntDesign name="pluscircle" size={30} color="white" />
           </Text>
         </Pressable>
       </View>
@@ -235,10 +236,8 @@ const ToDoList = () => {
                     }}
                   >
                     <Image
-                      style={{ width: 100, height: 100 }}
-                      source={{
-                        uri: "https://cdn-icons-png.flaticon.com/128/6784/6784655.png",
-                      }}
+                      style={{ width: 100, height: 100, color: "white" }}
+                      source={require("../../image/check-mark.png")}
                     />
                   </View>
                   <View
@@ -250,7 +249,7 @@ const ToDoList = () => {
                     }}
                   >
                     <Text>
-                      <Entypo name="star-outlined" size={24} color="black" />
+                      <Entypo name="star-outlined" size={24} color="white" />
                     </Text>
                     <MaterialIcons
                       name="arrow-drop-down"
@@ -284,7 +283,7 @@ const ToDoList = () => {
                           }}
                         >
                           <Text style={{ color: "white" }}>
-                            <AntDesign name="delete" size={24} color="black" />
+                            <AntDesign name="delete" size={24} color="grey" />
                           </Text>
                         </Pressable>
                         <Text
@@ -311,12 +310,12 @@ const ToDoList = () => {
               }}
             >
               <Image
-                style={{ width: 100, height: 100 }}
-                source={{
-                  uri: "https://cdn-icons-png.flaticon.com/128/4201/4201973.png",
-                }}
+                style={{ width: 200, height: 300 }}
+                source={require("../../image/list.png")}
               />
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              <Text
+                style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
+              >
                 You don't have any tasks for today!
               </Text>
               <Pressable
@@ -438,107 +437,3 @@ const ToDoList = () => {
 };
 
 export default ToDoList;
-
-export const ToDoListWithBottomNavigation = () => {
-  return (
-    <View style={{ flex: 2 }}>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="TodoList"
-          component={ToDoList}
-          options={{
-            tabBarLabel: "Todos",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <AntDesign name="calendar" size={24} color="#7CB9E8" />
-              ) : (
-                <AntDesign name="calendar" size={24} color="black" />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="calendar"
-          component={Calendar}
-          options={{
-            tabBarLabel: "Calendar",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <AntDesign name="calendar" size={24} color="#7CB9E8" />
-              ) : (
-                <AntDesign name="calendar" size={24} color="black" />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="StopWatch"
-          component={StopWatch}
-          options={{
-            tabBarLabel: "Stopwatch",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Entypo name="stopwatch" size={24} color="#7CB9E8" />
-              ) : (
-                <Entypo name="stopwatch" size={24} color="black" />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Timer"
-          component={Timer}
-          options={{
-            tabBarLabel: "timer",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Ionicons name="timer" size={24} color="#7CB9E8" />
-              ) : (
-                <Ionicons name="timer" size={24} color="black" />
-              ),
-          }}
-        />
-
-        <Tab.Screen
-          name="profile"
-          component={ProfilePage}
-          options={{
-            tabBarLabel: "Profile",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            headerShown: false,
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <MaterialCommunityIcons
-                  name="account-details"
-                  size={24}
-                  color="#7CB9E8"
-                />
-              ) : (
-                <MaterialCommunityIcons
-                  name="account-details"
-                  size={24}
-                  color="black"
-                />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{
-            tabBarLabel: "Home",
-            tabBarLabelStyle: { color: "#7CB9E8" },
-            headerShown: false,
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <MaterialCommunityIcons name="home" size={24} color="#7CB9E8" />
-              ) : (
-                <MaterialCommunityIcons name="home" size={24} color="black" />
-              ),
-          }}
-        />
-      </Tab.Navigator>
-    </View>
-  );
-};
