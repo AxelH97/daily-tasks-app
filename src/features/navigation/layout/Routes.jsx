@@ -16,7 +16,6 @@ const Drawer = createDrawerNavigator();
 
 const DrawerContent = () => {
   const { user, dispatchUser } = useUsersContext();
-  const userId = user._id;
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
 
@@ -44,19 +43,13 @@ const DrawerContent = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        `${API_URL}/users/logout`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}/users/logout`, {}, {
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (response.status === 200) {
         dispatchUser({ type: "logout" });
-        navigation.navigate(paths.welcomescreen);
+        navigation.navigate("WelcomeScreen");
       } else {
         Alert.alert("Logout Failed", response.data.message);
       }
@@ -67,15 +60,13 @@ const DrawerContent = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${user.user.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await axios.delete(`${API_URL}/users/${user._id}`, {
+        headers: { "Content-Type": "application/json" },
       });
 
       if (response.status === 200) {
         dispatchUser({ type: "logout" });
-        navigation.navigate(paths.welcomescreen);
+        navigation.navigate("WelcomeScreen");
       } else {
         Alert.alert("Delete Account Failed", response.data.message);
       }
@@ -85,60 +76,64 @@ const DrawerContent = () => {
   };
 
   return (
-    <View>
-      <TouchableOpacity
-        onPress={handleLogout}
-        style={{ flexDirection: "row", alignItems: "center" }}
-      >
-        <Text style={{ padding: 10, fontSize: 16 }}>Logout</Text>
-        <MaterialIcons name="logout" size={16} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDeleteAccount}>
-        <Text style={{ padding: 10, fontSize: 16 }}>Delete Account</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      {userData && (
+        <View style={styles.profileContainer}>
+          {userData.avatarImg?.url ? (
+            <Image source={{ uri: userData.avatarImg.url }} style={styles.avatar} />
+          ) : (
+            <Text>No profile image available</Text>
+          )}
+          <Text style={styles.username}>{userData.username}</Text>
+        </View>
+      )}
+      {user.isLoggedIn && (
+        <>
+          <TouchableOpacity onPress={handleLogout} style={styles.button}>
+            <Text style={styles.buttonText}>Logout</Text>
+            <MaterialIcons name="logout" size={16} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleDeleteAccount} style={styles.button}>
+            <Text style={styles.buttonText}>Delete Account</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
-
-export default function Routes() {
+const StackNavigator = () => {
   const routes = useRoutes();
   const { user } = useUsersContext();
-
+  return (
+    <Stack.Navigator>
+      {routes.map((route) => (
+        <Stack.Screen
+          key={route.path}
+          name={route.path}
+          component={route.component}
+          options={({ navigation }) => {
+            if (route.isProtected && !user.isLoggedIn && user.email !== "") {
+              navigation.navigate(route.redirectTo);
+            }
+            return {
+              headerShown: false,
+            };
+          }}
+        />
+      ))}
+    </Stack.Navigator>
+  );
+};
+export default function Routes() {
   return (
     <NavigationContainer>
-      {user.isLoggedIn ? (
-        <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-          <Drawer.Screen name="Menu">
-            {() => (
-              <Stack.Navigator>
-                {routes.map((route) => (
-                  <Stack.Screen
-                    key={route.path}
-                    name={route.path}
-                    component={route.component}
-                    options={{
-                      headerShown: false,
-                    }}
-                  />
-                ))}
-              </Stack.Navigator>
-            )}
-          </Drawer.Screen>
-        </Drawer.Navigator>
-      ) : (
-        <Stack.Navigator>
-          {routes.map((route) => (
-            <Stack.Screen
-              key={route.path}
-              name={route.path}
-              component={route.component}
-              options={{
-                headerShown: false,
-              }}
-            />
-          ))}
-        </Stack.Navigator>
-      )}
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+        <Drawer.Screen
+          name="StackNavigator"
+          component={StackNavigator}
+          options={{ title: "" }}
+        />
+      </Drawer.Navigator>
       <ModalPortal />
     </NavigationContainer>
   );
@@ -163,5 +158,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     textAlign: 'center',
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    marginRight: 10,
   }
 });
