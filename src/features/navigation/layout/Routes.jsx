@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -6,8 +6,7 @@ import useRoutes from "../../../features/navigation/routing/routes.js";
 import { useUsersContext } from "../../../context/UserContext.jsx";
 import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "../../../data/api";
-import { View, TouchableOpacity, Text, Alert } from "react-native";
-import { paths } from "../../navigation/routing/paths.js";
+import { View, TouchableOpacity, Text, Alert, Image, StyleSheet } from "react-native";
 import axios from "axios";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ModalPortal } from "react-native-modals";
@@ -17,24 +16,40 @@ const Drawer = createDrawerNavigator();
 
 const DrawerContent = () => {
   const { user, dispatchUser } = useUsersContext();
-  const userId = user._id;
   const navigation = useNavigation();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const getUserById = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/users/${user._id}`);
+        if (response.status === 200) {
+          setUserData(response.data);
+        } else {
+          throw new Error("Failed to fetch profile data");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error.message);
+        if (error.message === "Unauthorized") {
+          navigation.navigate("Login");
+        }
+      }
+    };
+
+    if (user && user._id) {
+      getUserById();
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        `${API_URL}/users/logout`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}/users/logout`, {}, {
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (response.status === 200) {
         dispatchUser({ type: "logout" });
-        navigation.navigate(paths.welcomescreen);
+        navigation.navigate("WelcomeScreen");
       } else {
         Alert.alert("Logout Failed", response.data.message);
       }
@@ -45,15 +60,13 @@ const DrawerContent = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${userId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await axios.delete(`${API_URL}/users/${user._id}`, {
+        headers: { "Content-Type": "application/json" },
       });
 
       if (response.status === 200) {
         dispatchUser({ type: "logout" });
-        navigation.navigate(paths.welcomescreen);
+        navigation.navigate("WelcomeScreen");
       } else {
         Alert.alert("Delete Account Failed", response.data.message);
       }
@@ -63,89 +76,96 @@ const DrawerContent = () => {
   };
 
   return (
-    <View style={{ marginTop: 40 }}>
-      <TouchableOpacity
-        onPress={handleLogout}
-        style={{ flexDirection: "row", alignItems: "center" }}
-      >
-        <Text style={{ padding: 10, fontSize: 16 }}>Logout</Text>
-        <MaterialIcons name="logout" size={16} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDeleteAccount}>
-        <Text style={{ padding: 10, fontSize: 16 }}>Delete Account</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      {userData && (
+        <View style={styles.profileContainer}>
+          {userData.avatarImg?.url ? (
+            <Image source={{ uri: userData.avatarImg.url }} style={styles.avatar} />
+          ) : (
+            <Text>No profile image available</Text>
+          )}
+          <Text style={styles.username}>{userData.username}</Text>
+        </View>
+      )}
+      {user.isLoggedIn && (
+        <>
+          <TouchableOpacity onPress={handleLogout} style={styles.button}>
+            <Text style={styles.buttonText}>Logout</Text>
+            <MaterialIcons name="logout" size={16} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleDeleteAccount} style={styles.button}>
+            <Text style={styles.buttonText}>Delete Account</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
-
-export default function Routes() {
+const StackNavigator = () => {
   const routes = useRoutes();
   const { user } = useUsersContext();
-
-  console.log("Route:", routes);
-
+  return (
+    <Stack.Navigator>
+      {routes.map((route) => (
+        <Stack.Screen
+          key={route.path}
+          name={route.path}
+          component={route.component}
+          options={({ navigation }) => {
+            if (route.isProtected && !user.isLoggedIn && user.email !== "") {
+              navigation.navigate(route.redirectTo);
+            }
+            return {
+              headerShown: false,
+            };
+          }}
+        />
+      ))}
+    </Stack.Navigator>
+  );
+};
+export default function Routes() {
   return (
     <NavigationContainer>
-      {/* {user.isLoggedIn ? ( */}
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Menu">
-          {() => (
-            <Stack.Navigator>
-              {routes.map((route) => (
-                <Stack.Screen
-                  key={route.path}
-                  name={route.path}
-                  component={route.component}
-                  options={({ navigation }) => {
-                    console.log("Route options for:", route.path);
-                    console.log("route:", route);
-                    console.log("user.isLoggedIn:", user.isLoggedIn);
-                    if (
-                      route.isProtected &&
-                      !user.isLoggedIn &&
-                      user.email !== ""
-                    ) {
-                      // Navigate to the redirectTo path if user is not logged in
-                      navigation.navigate(route.redirectTo);
-                    }
-                    return {
-                      headerShown: false,
-                    };
-                  }}
-                />
-              ))}
-            </Stack.Navigator>
-          )}
-        </Drawer.Screen>
+        <Drawer.Screen
+          name="StackNavigator"
+          component={StackNavigator}
+          options={{ title: "" }}
+        />
       </Drawer.Navigator>
-      {/* ) : (
-        <Stack.Navigator>
-          {routes.map((route) => (
-            <Stack.Screen
-              key={route.path}
-              name={route.path}
-              component={route.component}
-              options={({ navigation }) => {
-                console.log("Route options for:", route.path);
-                console.log("route:", route);
-                console.log("user.isLoggedIn:", user.isLoggedIn);
-                if (
-                  route.isProtected &&
-                  !user.isLoggedIn &&
-                  user.email !== ""
-                ) {
-                  // Navigate to the redirectTo path if user is not logged in
-                  navigation.navigate(route.redirectTo);
-                }
-                return {
-                  headerShown: false,
-                };
-              }}
-            />
-          ))}
-        </Stack.Navigator>
-      )} */}
       <ModalPortal />
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  profileContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  username: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    marginRight: 10,
+  }
+});

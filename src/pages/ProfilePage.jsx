@@ -8,11 +8,11 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const { user } = useUsersContext();
-
+const userID=user._id
   useEffect(() => {
     const getUserById = async () => {
       try {
-        const response = await axios.get(`${API_URL}/users/${user.user.id}`);
+        const response = await axios.get(`${API_URL}/users/${userID}`);
         console.log("res", response);
         if (!response.status === 200) {
           throw new Error("Failed to fetch profile data");
