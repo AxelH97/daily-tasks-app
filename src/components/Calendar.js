@@ -1,89 +1,76 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { Calendar } from "react-native-calendars";
-import axios from "axios";
-import { FontAwesome, Feather, MaterialIcons } from "@expo/vector-icons";
+import { format } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Agenda } from "react-native-calendars";
+import { useUsersContext } from "../context/UserContext";
 import { API_URL } from "../data/api";
+import axios from "axios";
 
 const CalendarComponent = () => {
-  const today = moment().format("YYYY-MM-DD");
-  const [selectedDate, setSelectedDate] = useState(today);
-  const [todos, setTodos] = useState([]);
-
-  const fetchCompletedTodos = async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}/todos/completed/${selectedDate}`
-      );
-      const completedTodos = response.data.completedTodos || [];
-      setTodos(completedTodos);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const [items, setItems] = useState({});
+  const { user } = useUsersContext();
+  const userId = user._id;
+  console.log("userId", userId);
 
   useEffect(() => {
-    fetchCompletedTodos();
-  }, [selectedDate]);
+    const getData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/users/${userId}/todos`);
+        const data = response.data;
+        const personalTask = data.todos;
+        console.log("data", personalTask);
 
-  const handleDayPress = (day) => {
-    setSelectedDate(day.dateString);
+        const mappedData = personalTask.map((task) => {
+          return {
+            ...task,
+            date: format(new Date(task.dueDate), "yyyy-MM-dd"),
+          };
+        });
+
+        const reduced = mappedData.reduce((acc, currentItem) => {
+          const { date, ...coolItem } = currentItem;
+          if (!acc[date]) {
+            acc[date] = [];
+          }
+          acc[date].push(coolItem);
+          return acc;
+        }, {});
+
+        setItems(reduced);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    getData();
+  }, [userId]);
+
+  const renderItem = (item) => {
+    return (
+      <View style={styles.itemContainer}>
+        <Text>{item.title}</Text>
+      </View>
+    );
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <Calendar
-        onDayPress={handleDayPress}
-        markedDates={{
-          [selectedDate]: { selected: true, selectedColor: "#7CB9E8" },
-        }}
-      />
-
-      <View style={{ marginTop: 20 }} />
-
-      <View style={styles.header}>
-        <Text>Completed Tasks</Text>
-        <MaterialIcons name="arrow-drop-down" size={24} color="black" />
-      </View>
-
-      {todos.map((item, index) => (
-        <Pressable style={styles.todoItem} key={index}>
-          <View style={styles.todoContent}>
-            <FontAwesome name="circle" size={18} color="gray" />
-            <Text style={styles.todoText}>{item.title}</Text>
-            <Feather name="flag" size={20} color="gray" />
-          </View>
-        </Pressable>
-      ))}
-    </View>
+    <SafeAreaView style={styles.safe}>
+      <Agenda items={items} renderItem={renderItem} />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-    marginVertical: 10,
-    marginHorizontal: 10,
-  },
-  todoItem: {
-    backgroundColor: "#E0E0E0",
-    padding: 10,
-    borderRadius: 7,
-    marginVertical: 10,
-    marginHorizontal: 10,
-  },
-  todoContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  todoText: {
+  safe: {
     flex: 1,
-    textDecorationLine: "line-through",
-    color: "gray",
+  },
+  itemContainer: {
+    backgroundColor: "white",
+    margin: 5,
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
 });
 
