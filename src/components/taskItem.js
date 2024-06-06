@@ -10,6 +10,7 @@ const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
       style={{
         backgroundColor: "#E0E0E0",
         padding: 10,
+
         borderRadius: 7,
         marginVertical: 10,
       }}
