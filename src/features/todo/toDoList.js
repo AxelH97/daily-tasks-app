@@ -321,44 +321,44 @@ const ToDoList = () => {
           )}
         </View>
       </ScrollView>
-
       <BottomModal
-        visible={isModalVisible}
-        onTouchOutside={() => setModalVisible(false)}
-        swipeDirection={["up", "down"]}
-        swipeThreshold={200}
-        modalAnimation={
-          new SlideAnimation({
-            slideFrom: "bottom",
-          })
-        }
-      >
-        <ModalContent style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Add Task</Text>
-          <View style={styles.modalInputContainer}>
-            <TextInput
-              value={taskTitle}
-              onChangeText={setTaskTitle}
-              placeholder="Task Title"
-              style={styles.input}
-            />
-            <TextInput
-              value={taskCategory}
-              onChangeText={setTaskCategory}
-              placeholder="Task Category"
-              style={styles.input}
-            />
-          </View>
-          <Agenda
-            items={items}
-            renderItem={renderItem}
-            onDayPress={handleDayPress}
-            selected={selectedDate}
-          />
-          <Button title="Add Task" onPress={handleAddTask} />
-          <Button title="Cancel" onPress={() => setModalVisible(false)} />
-        </ModalContent>
-      </BottomModal>
+  visible={isModalVisible}
+  onTouchOutside={() => setModalVisible(false)}
+  swipeDirection={["up", "down"]}
+  swipeThreshold={200}
+  modalAnimation={
+    new SlideAnimation({
+      slideFrom: "bottom",
+    })
+  }
+>
+  <ModalContent style={styles.modalContent}>
+    <Text style={styles.modalTitle}>Add Task</Text>
+    <View style={styles.modalInputContainer}>
+      <TextInput
+        value={taskTitle}
+        onChangeText={setTaskTitle}
+        placeholder="Task Title"
+        style={styles.input}
+      />
+      <TextInput
+        value={taskCategory}
+        onChangeText={setTaskCategory}
+        placeholder="Task Category"
+        style={styles.input}
+      />
+    </View>
+    <Agenda
+      items={{}} // Empty items object to hide tasks
+      renderItem={() => null} // Do not render any items
+      onDayPress={handleDayPress}
+      selected={selectedDate}
+    />
+    <Button title="Add Task" onPress={handleAddTask} />
+    <Button title="Cancel" onPress={() => setModalVisible(false)} />
+  </ModalContent>
+</BottomModal>
+
 
       <BottomModal
         visible={editModalVisible}
