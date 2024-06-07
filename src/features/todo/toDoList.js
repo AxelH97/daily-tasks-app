@@ -9,6 +9,8 @@ import {
   Image,
   Alert,
   TouchableOpacity,
+  StyleSheet,
+  Button,
 } from "react-native";
 import axios from "axios";
 import moment from "moment";
@@ -23,6 +25,8 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import TaskItem from "../../components/taskItem";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Modal } from "react-native";
 
 const ToDoList = () => {
   const { tasks, dispatchTasks } = useTaskContext();
@@ -38,6 +42,9 @@ const ToDoList = () => {
   const [pendingTodos, setPendingTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
   const [marked, setMarked] = useState(false);
+  const [noteTitle, setNoteTitle] = useState("");
+  const [noteContent, setNoteContent] = useState("");
+  const [noteModalVisible, setNoteModalVisible] = useState(false);
   const { user } = useUsersContext();
   const userId = user._id;
   const suggestions = [];
@@ -135,6 +142,41 @@ const ToDoList = () => {
   const openEditModal = (todo) => {
     setCurrentTodo(todo);
     setEditModalVisible(true);
+  };
+
+  const addNotizToTask = async () => {
+    try {
+      const noteData = {
+        title: noteTitle,
+        content: noteContent,
+        user: userId,
+      };
+      const updatedTask = {
+        ...todos[0],
+        notes: [noteData, ...(todos[0].notes || [])],
+      };
+      await axios.put(`${API_URL}notes/tasks/${todos[0]._id}`, updatedTask);
+      const updatedTodos = todos.map((task, index) => {
+        if (index === 0) {
+          return updatedTask;
+        }
+        return task;
+      });
+      setTodos(updatedTodos);
+      setNoteTitle("");
+      setNoteContent("");
+      setModalVisible(false);
+    } catch (error) {
+      console.error("Error adding note to task:", error);
+    }
+  };
+
+  const showOtherModal = () => {
+    setModalVisible(true);
+  };
+
+  const showNoteModal = () => {
+    setNoteModalVisible(true);
   };
 
   console.log("completed", completedTodos);
@@ -343,63 +385,119 @@ const ToDoList = () => {
             width: "100%",
             height: 220,
             backgroundColor: "#F2F2F2",
-            borderRadius: 20,
+            // borderRadius: 20,
           }}
         >
-          <View
-            style={{
-              marginVertical: 10,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <TextInput
-              value={todo}
-              onChangeText={(text) => setTodo(text)}
-              placeholder="Input a new task here"
+          <View style={styles.modalContent}>
+            <View style={styles.rowContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Add a task"
+                value={todo}
+                onChangeText={setTodo}
+              />
+              <TouchableOpacity onPress={addTodo} style={styles.sendButton}>
+                <MaterialCommunityIcons name="send" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+
+            <View
               style={{
-                padding: 12,
-                borderColor: "#D3D3D3",
-                borderWidth: 1,
-                borderRadius: 10,
-                flex: 1,
-              }}
-            />
-            <TouchableOpacity
-              onPress={addTodo}
-              style={{
-                fontSize: 12,
-                color: "#007FFF",
-                fontWeight: "bold",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                marginTop: 10,
               }}
             >
-              <MaterialCommunityIcons name="send" size={24} color="black" />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginHorizontal: 10,
+                }}
+                onPress={showNoteModal}
+              >
+                <SimpleLineIcons name="notebook" size={24} color="black" />
+                <Text style={{ marginLeft: 5 }}>Note</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginHorizontal: 5,
+                }}
+                onPress={showNoteModal}
+              >
+                <AntDesign name="calendar" size={24} color="black" />
+                <Text style={{ marginLeft: 5 }}>Calendar</Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 5,
+                marginVertical: 10,
+              }}
+            >
+              <Text>Category</Text>
+              <MaterialIcons name="arrow-drop-down" size={24} color="black" />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
+              }}
+            >
+              <Pressable
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 6,
+                  borderRadius: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginHorizontal: 5,
+                  backgroundColor: "orange",
+                }}
+              >
+                <Text style={{ color: "black" }}>All</Text>
+              </Pressable>
+              <Pressable
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 6,
+                  borderRadius: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginHorizontal: 5,
+                  backgroundColor: "green",
+                }}
+              >
+                <Text style={{ color: "black" }}>Work</Text>
+              </Pressable>
+              <Pressable
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 6,
+                  borderRadius: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginHorizontal: 5,
+                  backgroundColor: "red",
+                }}
+              >
+                <Text style={{ color: "black" }}>Personal</Text>
+              </Pressable>
+            </View>
           </View>
         </ModalContent>
       </BottomModal>
 
-      <BottomModal
-        visible={editModalVisible}
-        onTouchOutside={() => setEditModalVisible(false)}
-        swipeDirection={["up", "down"]}
-        swipeThreshold={200}
-        modalAnimation={
-          new SlideAnimation({
-            slideFrom: "bottom",
-          })
-        }
-      >
-        <ModalContent style={{ width: "100%", height: 280 }}>
-          <View
-            style={{
-              marginVertical: 10,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+      <Modal visible={editModalVisible} transparent={true} animationType="fade">
+        <View style={styles.popupModalContainer}>
+          <View style={styles.popupModalContent}>
+            <Text style={{ fontWeight: "bold" }}>Edit Task</Text>
             <TextInput
               value={currentTodo?.title}
               onChangeText={(text) =>
@@ -410,28 +508,136 @@ const ToDoList = () => {
               }
               placeholder="Edit your task here"
               style={{
-                padding: 10,
-                borderColor: "#E0E0E0",
-                borderWidth: 1,
-                borderRadius: 5,
-                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 5,
+                paddingBottom: 3,
+                marginTop: 20,
+                borderBottomWidth: 2,
+                borderBottomColor: "gray",
               }}
             />
-            <Text
-              onPress={editTodo}
+            <View
               style={{
-                fontSize: 12,
-                color: "black",
-                fontWeight: "bold",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
               }}
             >
-              Save
-            </Text>
+              <TouchableOpacity onPress={() => setEditModalVisible(false)}>
+                <Text style={{ color: "black" }}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={editTodo} style={{ marginRight: 10 }}>
+                <Text style={{ color: "black", fontSize: 14 }}>Save</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </ModalContent>
-      </BottomModal>
+        </View>
+      </Modal>
+
+      <Modal visible={noteModalVisible} transparent={true} animationType="fade">
+        <View style={styles.popupModalContainer}>
+          <View style={styles.popupModalContent}>
+            <Text style={styles.header}>Note</Text>
+
+            <TextInput
+              style={styles.input}
+              placeholder="Title"
+              value={noteTitle}
+              onChangeText={setNoteTitle}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Content"
+              value={noteContent}
+              onChangeText={setNoteContent}
+              multiline
+            />
+            <Button title="Add Note" onPress={addNotizToTask} />
+            <TouchableOpacity
+              onPress={() => {
+                setNoteModalVisible(false);
+                showOtherModal();
+              }}
+            >
+              <Text style={{ color: "black" }}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  popupModalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  popupModalContent: {
+    width: "80%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    padding: 20,
+    paddingTop: 40,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2E7CE2",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingBottom: 3,
+    marginTop: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: "gray",
+  },
+  button: {
+    width: "100%",
+    backgroundColor: "#2E7CE2",
+    borderRadius: 6,
+    padding: 10,
+    marginTop: 20,
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  iconText: {
+    marginLeft: 5,
+  },
+  sendButton: {
+    marginLeft: 10,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  input: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingBottom: 3,
+    marginTop: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: "gray",
+  },
+  sendButton: {
+    marginLeft: 10,
+  },
+});
 
 export default ToDoList;

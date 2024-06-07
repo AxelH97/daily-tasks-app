@@ -3,7 +3,7 @@ const developmentMode = process.env.NODE_ENV === "development";
 const productionMode = process.env.NODE_ENV === "production";
 
 const API_URL = developmentMode
-  ? `http://${DEVELOPER_IP}:4444`
+  ? `http://192.168.0.67:4444`
   : `https://daily-tasks-backend.onrender.com`;
 
 console.log("API_URL:", API_URL);

@@ -2,6 +2,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
   return (
@@ -15,6 +16,7 @@ const TaskItem = ({ item, onMarkCompleted, onEdit }) => {
         marginVertical: 10,
       }}
     >
+      <Feather name="edit-2" size={10} color="black" />
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
         <Text style={{ flex: 1 }}>{item?.title}</Text>
         <Pressable
