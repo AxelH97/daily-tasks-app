@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -332,7 +331,7 @@ const ToDoList = () => {
     })
   }
 >
-  <ModalContent style={styles.modalContent}>
+  <ModalContent style={styles.fullScreenModalContent}>
     <Text style={styles.modalTitle}>Add Task</Text>
     <View style={styles.modalInputContainer}>
       <TextInput
@@ -348,12 +347,22 @@ const ToDoList = () => {
         style={styles.input}
       />
     </View>
-    <Agenda
-      items={{}} // Empty items object to hide tasks
-      renderItem={() => null} // Do not render any items
-      onDayPress={handleDayPress}
-      selected={selectedDate}
-    />
+    <View style={styles.calendarContainer}>
+      <Agenda
+        items={items} // Pass the items to the Agenda
+        renderItem={renderItem} // Use the renderItem function to render tasks
+        onDayPress={handleDayPress}
+        selected={selectedDate}
+        showOnlySelectedDayItems={false}
+        pastScrollRange={0}
+        futureScrollRange={1}
+        markingType={'custom'}
+        theme={{
+          calendarBackground: 'transparent',
+          agendaKnobColor: 'grey'
+        }}
+      />
+    </View>
     <Button title="Add Task" onPress={handleAddTask} />
     <Button title="Cancel" onPress={() => setModalVisible(false)} />
   </ModalContent>
@@ -483,12 +492,15 @@ const styles = StyleSheet.create({
     color: "white",
     marginVertical: 10,
   },
-  modalContent: {
+  fullScreenModalContent: {
     width: "100%",
-    height: "80%",
+    height: "100%",
     backgroundColor: "#F2F2F2",
     borderRadius: 20,
     padding: 20,
+  },
+  calendarContainer: {
+    height: "40%",
   },
   modalTitle: {
     fontSize: 24,
